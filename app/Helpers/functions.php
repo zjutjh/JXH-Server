@@ -14,11 +14,11 @@
  * @param  string   $redirect_url
  * @return \Symfony\Component\HttpFoundation\Response
  */
-function RJM($data, $err_code, $err_msg = '', $redirect_url = null)
+function RJM($data, $code, $msg = '', $redirect_url = null)
 {
     return response([
-        'errcode' => $err_code,
-        'errmsg' => $err_msg,
+        'code' => $code,
+        'error' => $msg,
         'data' => $data,
         'redirect' => $redirect_url,
     ]);
