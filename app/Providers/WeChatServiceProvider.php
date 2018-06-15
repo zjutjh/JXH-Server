@@ -5,6 +5,7 @@ namespace App\Providers;
 use EasyWeChat\Factory;
 use EasyWeChat\OfficialAccount\Application;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\Cache\Simple\RedisCache;
 
 class WeChatServiceProvider extends ServiceProvider
 {
