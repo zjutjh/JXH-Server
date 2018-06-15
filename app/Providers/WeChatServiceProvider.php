@@ -26,7 +26,11 @@ class WeChatServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('wechat', function($app) {
-            return Factory::officialAccount(config('wechat'));
+            $predis = app('redis')->connection()->client();
+            $cacheDriver = new RedisCache($predis);
+            $wechat = Factory::officialAccount(config('wechat'));
+            $wechat['cache'] = $cacheDriver;
+            return $wechat;
         });
     }
 }
