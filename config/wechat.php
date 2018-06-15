@@ -35,6 +35,8 @@ return [
         'file'       => '/tmp/easywechat.log',
     ],
 
+    'cache' => new \Symfony\Component\Cache\Simple\RedisCache(app('redis')->connection()->client()),
+
     /**
      * 接口请求相关配置，超时时间等，具体可用参数请参考：
      * http://docs.guzzlephp.org/en/stable/request-config.html
