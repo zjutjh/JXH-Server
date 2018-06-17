@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\WechatService;
 use EasyWeChat\Factory;
 use EasyWeChat\OfficialAccount\Application;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +33,10 @@ class WeChatServiceProvider extends ServiceProvider
             $wechat = Factory::officialAccount(config('wechat'));
             $wechat['cache'] = $cacheDriver;
             return $wechat;
+        });
+
+        $this->app->singleton('wechatService', function($app) {
+            return new WechatService();
         });
     }
 }

@@ -9,16 +9,21 @@ class ServerController extends Controller
 {
     public $wechat;
 
-    public function __construct() {
+    public $wechatService;
+
+    public function __construct(wechat $wechat)
+    {
         $this->wechat = app('wechat');
+        $this->wechatService = app('wechatService');
     }
 
 
-    public function server() {
-        $this->wechat->server->push(function ($message)  {
+    public function server()
+    {
+        $this->wechat->server->push(function ($message) {
             $type = $message->MsgType;
             try {
-                $res = $this->$type($message);
+                $res = $this->wechatService->$type($message);
                 return $res;
             } catch (BadMethodCallException $e) {
                 return '问题来了';
@@ -28,7 +33,5 @@ class ServerController extends Controller
         $res = $this->wechat->server->serve();
         return $res;
     }
-
-
 
 }

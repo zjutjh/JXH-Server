@@ -23,3 +23,5 @@ function RJM($data, $code, $msg = '', $redirect_url = null)
         'redirect' => $redirect_url,
     ]);
 }
+
+
