@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return '精小弘';
 });
+
+
+// wechat oauth
+Route::get('redirect', 'OauthController@redirect');
+//

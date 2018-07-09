@@ -8,4 +8,8 @@
 
 return [
 
+    'jh' => [
+        'center' => 'http://user.jh.zjut.edu.cn/api.php',
+        'oauth' => 'http://jxh.jh.zjut.edu/redirect?url='
+    ]
 ];

@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('nickname')->nullable();
             $table->string('avatar')->nullable();
 
-            $table->boolean('is_send')->default(true);
+            $table->boolean('allow_send')->default(true);
+            $table->tinyInteger('user_type')->default(0)->comment('0 普通用户 1 管理员');
 
             $table->rememberToken();
             $table->timestamps();

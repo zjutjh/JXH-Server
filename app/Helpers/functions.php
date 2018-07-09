@@ -25,3 +25,22 @@ function RJM($data, $code, $msg = '', $redirect_url = null)
 }
 
 
+
+/**
+ * wechat 辅助函数
+ */
+
+
+function buildOauthRedirect($url, $scope = 'snsapi_userinfo') {
+    $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
+        .env('WECHAT_APP_ID')
+        .'&redirect_uri='
+        .urlencode(config('api.jh.oauth'))
+        .urlencode($url)
+        .'&response_type=code&scope='.$scope.'&state=STATE#wechat_redirect';
+    return $redirect_url;
+}
+
+/**
+ * end
+ */

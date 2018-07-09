@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 class OauthController extends Controller
 {
     public function oauth(Request $request) {
-        $oauth = app('wechat')->oauth()->setRequest($request)
-            ->redirect();
+        $oauth = app('wechat')->oauth()->setRequest($request)->redirect();
         return $oauth;
     }
 

@@ -48,4 +48,17 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+
+    /**
+     * 是否为管理员
+     * @return bool
+     */
+    public function isAdmin() {
+        if ($this->user_type > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }
