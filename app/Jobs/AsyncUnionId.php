@@ -36,11 +36,12 @@ class AsyncUnionId implements ShouldQueue
         $openid = $this->openid;
         $userInfo = $userService->get($openid);
         if ($unionid = $userInfo->unionid) {
-            (new User())->updateOrCreate([
+            $user = (new User())->updateOrCreate([
                 'unionID' => $unionid
             ], ['openid' => $openid,
                  'nickname' => $userInfo->nickname,
                   'avatar' => $userInfo->headimgurl]);
+            dd($user);
         }
     }
 }
