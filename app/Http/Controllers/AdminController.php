@@ -8,5 +8,4 @@ class AdminController extends Controller
 {
 
 
-
 }

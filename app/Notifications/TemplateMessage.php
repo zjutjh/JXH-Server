@@ -13,7 +13,6 @@ class TemplateMessage extends Notification
     use Queueable;
 
 
-    public $user;
 
     /**
      * [
@@ -34,9 +33,8 @@ class TemplateMessage extends Notification
      *
      * @return void
      */
-    public function __construct(User $user, array $data)
+    public function __construct( array $data)
     {
-        $this->user = $user;
         $this->data = $data;
     }
 
@@ -59,7 +57,7 @@ class TemplateMessage extends Notification
     public function toTemplate($notifiable)
     {
         return [
-            'touser' => $this->user->openid,
+            'touser' => $notifiable->openid,
             'template_id' => $this->data['template_id'],
             'url' => $this->data['url'],
             'data' => $this->data['data']

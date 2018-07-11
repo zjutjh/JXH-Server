@@ -17,5 +17,16 @@ Route::get('/', function () {
 
 
 // wechat oauth
+Route::get('wechat/login', 'Auth\LoginController@login');
 Route::get('redirect', 'OauthController@redirect');
+Route::get('oauth', 'OauthController@oauth');
+Route::get('wechat/openid', 'Auth\LoginController@wechat');
 //
+
+//message
+Route::get('/message/show/{id}', 'MessageController@show');
+//
+
+Route::get('/test', 'Auth\LoginController@agreeSend');
+
+

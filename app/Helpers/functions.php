@@ -41,6 +41,15 @@ function buildOauthRedirect($url, $scope = 'snsapi_userinfo') {
     return $redirect_url;
 }
 
+
+function trim_words($content, $num_words, $more = '...') {
+    $strip_tags_content = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $content);
+    $strip_tags_content = strip_tags($strip_tags_content);
+    $strip_tags_content = trim($strip_tags_content);
+    $resutlt = mb_substr($strip_tags_content, 0, $num_words, 'utf-8');
+    return $resutlt;
+}
+
 /**
  * end
  */

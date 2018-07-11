@@ -23,7 +23,7 @@ class TemplateMessageChannel
 
     public function send($notifiable, Notifiable $notification)
     {
-        $templateMsg = $notifiable->toTemplate();
+        $templateMsg = $notification->toTemplate();
         $this->templateSender->send($templateMsg);
     }
 
