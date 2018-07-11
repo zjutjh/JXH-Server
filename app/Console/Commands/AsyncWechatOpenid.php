@@ -45,7 +45,7 @@ class AsyncWechatOpenid extends Command
             $result = $userService->list($nextOpenid);
             $nextOpenid = $result->next_openid;
             $data = $result->data;
-            $list = $data['openid'];
+            $list = $data->openid;
             if (count($list) > 0) {
                 foreach ($list as $key => $value) {
                     AsyncUnionId::dispatch($value);
