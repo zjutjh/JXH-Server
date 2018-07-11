@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Notifications\TemplateMessage;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,20 +34,40 @@ class LoginController extends Controller
 
     public function wechat(Request $request) {
           $user = app('wechat')->oauth->user();
-          $new_user = new User();
-          $new_user->openid = $user->getId();
-          $new_user->name = $user->getName();
-          $new_user->sid = session('username');
-          $new_user->nickname = $user->getNickname();
-          $new_user->avatar = $user->getAvatar();
-          $new_user->save();
-          session(['openid' => $user->getId()]);
+          $openid = $user->getId();
+          if (!$user = User::where('openid', $openid)->first()) {
+              $user = new User();
+              $user->openid = $user->getId();
+              $user->name = $user->getName();
+              $user->nickname = $user->getNickname();
+              $user->avatar = $user->getAvatar();
+          }
+
+          $user->sid = session('username');
+          $user->save();
+          session(['openid' => $openid]);
+
+          // todo redirect agree
           return view('');
     }
 
 
     public function agreeSend() {
-
+        $user = User::where("sid", "201607420143")->first();
+        $config = [
+            'template_id' => 'ZR8X_OD4YRTmFpgcjLJXpgq51riQvIJSIC42FVXLNf8',
+            // todo url
+            'url' => '',
+            'data' => [
+                'first' => 'test',
+                'keyword1' => '浙江工业大学',
+                'keyword2' => 'test',
+                'keyword3' => '2018',
+                'keyword4' => 'testtesttesttestestestestestestestestestest',
+                'remark' => '点击查看详情'
+            ]
+        ];
+        $user->notify(new TemplateMessage($config));
 
     }
 }
