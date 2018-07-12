@@ -12,6 +12,7 @@ namespace App\Channels;
 
 
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class TemplateMessageChannel
 {
@@ -27,6 +28,7 @@ class TemplateMessageChannel
     {
         $templateMsg = $notification->toTemplate($notifiable);
         $this->templateSender->send($templateMsg);
+        Log::info("发送模板消息给-{$notifiable->nickname}-", ['时间' => date("Y-m-d H:i:s",time())]);
     }
 
 }
