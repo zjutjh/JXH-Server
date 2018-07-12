@@ -11,7 +11,7 @@ class ServerController extends Controller
 
     public $wechatService;
 
-    public function __construct(wechat $wechat)
+    public function __construct()
     {
         $this->wechat = app('wechat');
         $this->wechatService = app('wechatService');

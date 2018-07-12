@@ -9,7 +9,9 @@
 namespace App\Channels;
 
 
-use Illuminate\Notifications\Notifiable;
+
+
+use Illuminate\Notifications\Notification;
 
 class TemplateMessageChannel
 {
@@ -21,7 +23,7 @@ class TemplateMessageChannel
         $this->templateSender = app('wechat')->template_message;
     }
 
-    public function send($notifiable, Notifiable $notification)
+    public function send($notifiable, Notification  $notification)
     {
         $templateMsg = $notification->toTemplate();
         $this->templateSender->send($templateMsg);
