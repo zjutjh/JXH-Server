@@ -15,7 +15,7 @@ Route::get('/', function () {
     return '精小弘';
 });
 
-Route::any('/wechar/serve', 'Wechat\ServerController@server');
+Route::any('/wechat/serve', 'Wechat\ServerController@server');
 
 // wechat oauth
 Route::get('wechat/login', 'Auth\LoginController@login');
