@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\UserCenterService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -27,9 +28,18 @@ class LoginController extends Controller
             return RJM(null, -1, ['error' => $error ? $error : '用户名或密码错误']);
         }
 
-        session(['username', $username]);
+        if (!$user = User::where('openid', session('openid')->first())) {
 
-        return redirect('/oauth');
+        }
+
+        $user->sid = $username;
+        $user->save();
+
+
+        session(['username', $username]);
+        Log::info('用户绑定成功', ['username' => $username]);
+
+        return RJM(null, 1, ['error', '绑定成功']);
     }
 
     public function wechat(Request $request) {
@@ -43,12 +53,16 @@ class LoginController extends Controller
               $user->avatar = $user->getAvatar();
           }
 
-          $user->sid = session('username');
+//          $user->sid = session('username');
           $user->save();
           session(['openid' => $openid]);
 
+
+
+          Log::info('微信授权成功', ['username' => $user->sid]);
+
           // todo redirect agree
-          return view('');
+          return view('jxh.bind');
     }
 
 
@@ -68,6 +82,8 @@ class LoginController extends Controller
             ]
         ];
         $user->notify(new TemplateMessage($config));
+
+        Log::info('用户同意发送学校通知', ['username' => '']);
 
     }
 }

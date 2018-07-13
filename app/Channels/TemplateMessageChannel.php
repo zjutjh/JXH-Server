@@ -28,7 +28,7 @@ class TemplateMessageChannel
     {
         $templateMsg = $notification->toTemplate($notifiable);
         $this->templateSender->send($templateMsg);
-        Log::info("发送模板消息给-{$notifiable->nickname}-", ['时间' => date("Y-m-d H:i:s",time())]);
+        Log::info("发送模板消息", ['sid' => $notifiable->sid]);
     }
 
 }

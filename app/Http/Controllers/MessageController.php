@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MessageController extends Controller
 {
@@ -20,6 +21,8 @@ class MessageController extends Controller
         $message->informer = $informer;
         $message->content = $content;
         $message->save();
+
+        Log::info('创建了一条模板消息');
         return RJM(null, 1, '保存成功');
     }
 
@@ -56,6 +59,26 @@ class MessageController extends Controller
         $message->view = ++$message->view;
         $message->save();
         return view('jxh.show', ['messaeg' => $message]);
+    }
+
+
+
+    //图片上传
+
+
+    public function upload(Request $request) {
+        $img = $request->file('file');
+        $path = $img->store('public/images');
+        $url = asset('storage/' . substr($path, 7));
+        $res = [
+            'errno' => 0,
+            'data' => [
+                $url
+            ]
+        ];
+        return response($res);
+
+
     }
 
 
