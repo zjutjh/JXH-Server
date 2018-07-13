@@ -77,7 +77,30 @@ class MessageController extends Controller
             ]
         ];
         return response($res);
+    }
 
+    public function getMessage($id) {
+        if (!$message = Message::where('id', $id)->first()) {
+            return RJM(null, -1, '消息不存在');
+        }
+
+        return RJM(['message' => $message], 1, '查询成功');
+
+    }
+
+    public function getMessages() {
+        $messages = Message::paginate(15);
+        foreach ($messages->data as $item) {
+            $item->content = trim_words($item->content, 100);
+        }
+        return RJM($messages, 1, '查询成功');
+    }
+
+    public function pre() {
+
+    }
+
+    public function sendAll() {
 
     }
 

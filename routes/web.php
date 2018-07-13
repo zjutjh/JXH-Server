@@ -27,7 +27,8 @@ Route::post('user/agree', 'Auth\LoginController@agreeSend');
 
 //message
 Route::get('/message/show/{id}', 'MessageController@show');
-Route::post('/message/upload', 'MessageController@upload');
+
+
 //
 
 Route::get('/test', 'Auth\LoginController@agreeSend');
@@ -38,6 +39,19 @@ Route::get('/bind', function() {
 
 Route::get('success', function () {
    return view('jxh.success');
+});
+
+
+//admin
+Route::post('/admin/login', 'AdminController@login');
+Route::group(['middleware' => ['admin.check']], function() {
+    Route::post('/message/upload', 'MessageController@upload');
+    Route::post('/message/create', 'MessageController@create');
+    Route::post('/message/update', 'MessageController@update');
+    Route::get('/message/{id}', 'MessageController@getMessage');
+    Route::get('/messages', 'MessageController@getMessages');
+    Route::get('/message/pre/{id}', 'MessageController@pre');
+    Route::post('/message/send/{id}', 'MessageController@sendAll');
 });
 
 
