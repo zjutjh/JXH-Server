@@ -14,21 +14,27 @@ class LoginController extends Controller
 {
 
     public function login(Request $request) {
-        if ($request->session()->has('openid')) {
+        if ($request->session()->has('username')) {
             // todo 跳转已经绑定
-            return view('');
+            return view('jxh.success');
         }
         $username = $request->get('username');
         $passwd = $request->get('passwd');
+
 
         $uCenter = new UserCenterService();
 
         if (!$error = $uCenter->checkJhPassport($username, $passwd)) {
             $error = $uCenter->getError();
-            return RJM(null, -1, ['error' => $error ? $error : '用户名或密码错误']);
+            return RJM(null, -1,  $error ? $error : '用户名或密码错误');
+        }
+
+        if (!!$user = User::where('sid', $username)->first()) {
+            return view('jxh.success');
         }
 
         if (!$user = User::where('openid', session('openid')->first())) {
+            return RJM(null, -1,  'openid不存在');
 
         }
 
@@ -39,7 +45,7 @@ class LoginController extends Controller
         session(['username', $username]);
         Log::info('用户绑定成功', ['username' => $username]);
 
-        return RJM(null, 1, ['error', '绑定成功']);
+        return RJM(null, 1, '绑定成功');
     }
 
     public function wechat(Request $request) {
@@ -59,7 +65,7 @@ class LoginController extends Controller
 
 
 
-          Log::info('微信授权成功', ['username' => $user->sid]);
+          Log::info('微信授权成功', ['openid' => $user->openid]);
 
           // todo redirect agree
           return view('jxh.bind');
@@ -67,23 +73,17 @@ class LoginController extends Controller
 
 
     public function agreeSend() {
-        $user = User::where("sid", "201607420143")->first();
-        $config = [
-            'template_id' => 'ZR8X_OD4YRTmFpgcjLJXpgq51riQvIJSIC42FVXLNf8',
-            // todo url
-            'url' => '',
-            'data' => [
-                'first' => 'test',
-                'keyword1' => '浙江工业大学',
-                'keyword2' => 'test',
-                'keyword3' => '2018',
-                'keyword4' => 'testtesttesttestestestestestestestestestest',
-                'remark' => '点击查看详情'
-            ]
-        ];
-        $user->notify(new TemplateMessage($config));
+        if (!$username = session('username')) {
+            if (!$user = User::where('sid', $username)->first()) {
+                return  RJM(null, -1, '有一点错误');
+            }
+        }
+
+        $user->allow_send = true;
+        $user->save();
+
 
         Log::info('用户同意发送学校通知', ['username' => '']);
-
+        return RJM(null, 1, '确认成功');
     }
 }

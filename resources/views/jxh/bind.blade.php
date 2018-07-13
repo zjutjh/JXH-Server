@@ -70,7 +70,7 @@
                         if (result.code < 0) {
                             return _this.$message({
                                 showClose: true,
-                                message: result.errmsg || '发生了一点错误',
+                                message: result.msg || '发生了一点错误',
                                 type: 'warning'
                             })
                         }
@@ -83,17 +83,13 @@
                             _this.$http.post('/user/agree').then(function (res) {
                                 const result = res.body
                                 if (result.code < 0) {
-                                    return _this.$message({
-                                        showClose: true,
-                                        message: result.errmsg || '发生了一点错误',
-                                        type: 'warning'
-                                    })
+                                  return window.close()
                                 }
                                 this.$message({
                                     type: 'success',
                                     message: '确认成功!'
                                 });
-                                window.location.href = '{{ url('') }}'
+                                window.close()
 
                             })
                         }).catch(function() {

@@ -36,4 +36,8 @@ Route::get('/bind', function() {
    return view('jxh.bind');
 });
 
+Route::get('success', function () {
+   return view('jxh.success');
+});
+
 
