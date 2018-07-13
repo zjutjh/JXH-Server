@@ -38,7 +38,7 @@ Route::get('/bind', function() {
 });
 
 Route::get('success', function () {
-   return view('jxh.success');
+   return view('jxh.show');
 });
 
 

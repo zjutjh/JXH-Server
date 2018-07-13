@@ -63,8 +63,8 @@
                         return _this.$message.error('请输入你的精弘通行证或密码')
                     }
                     _this.$http.post('/wechat/login', {
-                        username: _this.iid,
-                        passwd: _this.name,
+                        username: _this.username,
+                        passwd: _this.passwd,
                     }).then(function (response) {
                         const result = response.body
                         if (result.code < 0) {

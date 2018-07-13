@@ -149,6 +149,22 @@ html, body {
   color: #fff;
 }
 
+.show-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+
+  .show-head {
+    position: relative;
+    display: flex;
+    height: px2rem(100);
+    width: 100%;
+    background: #15b3fa;
+  }
+
+}
+
 
 
 @media (min-width: 560px) {
