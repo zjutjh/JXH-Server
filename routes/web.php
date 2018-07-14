@@ -33,12 +33,9 @@ Route::get('/message/show/{id}', 'MessageController@show');
 
 Route::get('/test', 'Auth\LoginController@agreeSend');
 
-Route::get('/bind', function() {
-   return view('jxh.bind');
-});
 
 Route::get('success', function () {
-   return view('jxh.show');
+   return view('jxh.success');
 });
 
 
