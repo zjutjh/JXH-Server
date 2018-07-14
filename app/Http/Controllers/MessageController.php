@@ -130,7 +130,11 @@ class MessageController extends Controller
             $error = $uCenter->getError();
             return RJM(null, -1,  $error ? $error : '用户名或密码错误');
         }
-        SendAllUserMessage::dispatch();
+        $message = Message::where('id', $id)->first();
+
+        SendAllUserMessage::dispatch($message, [
+            'template_id' => config('templatemsg.message.template_id')
+        ]);
         return RJM(null, 1, '群发模版消息成功');
     }
 

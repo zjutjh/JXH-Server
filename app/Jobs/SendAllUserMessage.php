@@ -41,7 +41,7 @@ class SendAllUserMessage implements ShouldQueue
         $config = [
             'template_id' => $this->templateConfig['template_id'],
             // todo url
-            'url' => '',
+            'url' => url('message/show', [$this->message->id]),
             'data' => [
                 'first' => $this->message->title,
                 'keyword1' => '浙江工业大学',
