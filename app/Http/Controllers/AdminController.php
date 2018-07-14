@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function login(Request $request) {
         $username = $request->get('username');
-        $passwd = $request->get('passwd');
+        $passwd = $request->get('password');
 
         $uCenter = new UserCenterService();
         if (!$error = $uCenter->checkJhPassport($username, $passwd)) {
