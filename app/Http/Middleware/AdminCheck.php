@@ -3,7 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Contracts\Providers\Auth;
+
 
 class AdminCheck
 {

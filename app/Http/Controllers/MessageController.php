@@ -93,7 +93,7 @@ class MessageController extends Controller
 
     public function getMessages() {
         $messages = Message::paginate(15);
-        foreach ($messages->data as $item) {
+        foreach ($messages as $item) {
             $item->content = trim_words($item->content, 100);
         }
         return RJM($messages, 1, '查询成功');
