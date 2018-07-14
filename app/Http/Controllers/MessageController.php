@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\SendAllUserMessage;
 use App\Message;
 use App\Notifications\TemplateMessage;
+use App\Services\UserCenterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -120,7 +121,15 @@ class MessageController extends Controller
         return RJM(null, 1, '预览已经发送');
     }
 
-    public function sendAll() {
+    public function sendAll(Request $request, $id) {
+        $username = $request->get('username');
+        $passwd = $request->get('passwd');
+        $uCenter = new UserCenterService();
+
+        if (!$error = $uCenter->checkJhPassport($username, $passwd)) {
+            $error = $uCenter->getError();
+            return RJM(null, -1,  $error ? $error : '用户名或密码错误');
+        }
         SendAllUserMessage::dispatch();
         return RJM(null, 1, '群发模版消息成功');
     }
