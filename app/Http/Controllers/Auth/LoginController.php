@@ -83,7 +83,7 @@ class LoginController extends Controller
         $user->save();
 
 
-        Log::info('用户同意发送学校通知', ['username' => '']);
+        Log::info('用户同意发送学校通知', ['username' => session('username')]);
         return RJM(null, 1, '确认成功');
     }
 }
