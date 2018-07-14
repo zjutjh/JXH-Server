@@ -10,8 +10,9 @@
 </head>
 <body>
 <div id=app></div>
-<script type=text/javascript src=/assets/js/manifest.0aae7d464ede9d89f89a.js></script>
-<script type=text/javascript src=/assets/js/vendor.d0c10085f15c9e2b879f.js></script>
-<script type=text/javascript src=/assets/js/app.7e41b457d6c20b6e5004.js></script>
+<script type=text/javascript src=/assets/js/manifest.5edcc63bd7a403cfd9b3.js></script>
+<script type=text/javascript src=/assets/js/vendor.b336ccda10b0cfd4dbbb.js></script>
+<script type=text/javascript src=/assets/js/app.d749df508544b9977722.js></script>
+</body>
 </body>
 </html>

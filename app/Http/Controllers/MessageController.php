@@ -6,6 +6,7 @@ use App\Jobs\SendAllUserMessage;
 use App\Message;
 use App\Notifications\TemplateMessage;
 use App\Services\UserCenterService;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -129,6 +130,11 @@ class MessageController extends Controller
         if (!$error = $uCenter->checkJhPassport($username, $passwd)) {
             $error = $uCenter->getError();
             return RJM(null, -1,  $error ? $error : '用户名或密码错误');
+        }
+
+        $user =  User::where('sid', $username)->first();
+        if ($user->isAdmin()) {
+            return RJM(null, -1, '权限不足');
         }
         $message = Message::where('id', $id)->first();
 
