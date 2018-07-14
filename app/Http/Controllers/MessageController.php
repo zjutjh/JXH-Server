@@ -135,6 +135,7 @@ class MessageController extends Controller
         SendAllUserMessage::dispatch($message, [
             'template_id' => config('templatemsg.message.template_id')
         ]);
+        $message->is_send = true;
         return RJM(null, 1, '群发模版消息成功');
     }
 

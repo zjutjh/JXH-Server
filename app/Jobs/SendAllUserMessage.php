@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class SendAllUserMessage implements ShouldQueue
 {
@@ -51,6 +52,7 @@ class SendAllUserMessage implements ShouldQueue
                 'remark' => '点击查看详情'
             ]
         ];
+        Log::info(['config' => $config]);
         $users = User::all();
         foreach ($users as $user) {
             if ($user->allow_send) {
