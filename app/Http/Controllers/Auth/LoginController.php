@@ -79,7 +79,7 @@ class LoginController extends Controller
             return  RJM(null, -1, '有一点错误');
         }
 
-        $user->allow_send = true;
+        $user->allow_send = 1;
         $user->save();
 
 
