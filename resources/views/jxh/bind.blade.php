@@ -94,7 +94,7 @@
                 },
                 sure: function() {
                     var _this =this
-                    _this.$http.post('/user/agree').then(function (res) {
+                    _this.$http.post('/user/agree', { username: _this.username}).then(function (res) {
                         const result = res.body
                         if (result.code < 0) {
                             window.close();

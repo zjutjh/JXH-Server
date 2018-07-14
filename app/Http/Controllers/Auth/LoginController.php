@@ -74,16 +74,16 @@ class LoginController extends Controller
     }
 
 
-    public function agreeSend() {
-        if (!$user = User::where('sid', session('username'))->first()) {
+    public function agreeSend(Request $request) {
+        $username = $request->get('username');
+        if (!$user = User::where('sid', $username)->first()) {
             return  RJM(null, -1, '有一点错误');
         }
 
-        $user->allow_send = 1;
+        $user->allow_send = true;
         $user->save();
 
-
-        Log::info('用户同意发送学校通知', ['username' => session('username')]);
+        Log::info('用户同意发送学校通知', ['username' => $username]);
         return RJM(null, 1, '确认成功');
     }
 }
