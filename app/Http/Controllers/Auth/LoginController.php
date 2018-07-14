@@ -48,9 +48,6 @@ class LoginController extends Controller
     }
 
     public function wechat(Request $request) {
-        if ($request->session()->has('openid')) {
-            return view('jxh.success');
-        }
           $user = app('wechat')->oauth->user();
           $openid = $user->getId();
           if (!$user = User::where('openid', $openid)->first()) {
