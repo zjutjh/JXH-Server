@@ -43,6 +43,9 @@ Route::get('success', function () {
 
 
 //admin
+Route::get('/admin', function (){
+    return view('admin.index');
+});
 Route::post('/admin/login', 'AdminController@login');
 Route::group(['middleware' => ['admin.check']], function() {
     Route::post('/message/upload', 'MessageController@upload');
