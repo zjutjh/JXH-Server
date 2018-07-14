@@ -105,9 +105,7 @@
                             type: 'success',
                             message: '确认成功!'
                         });
-                        window.close();
-                        WeixinJSBridge.call('closeWindow');
-
+                        window.location.href = '{{ url('success') }}'
                     })
                 },
                 cancel: function() {
