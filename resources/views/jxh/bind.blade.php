@@ -31,11 +31,17 @@
             </div>
 
         </form>
+        <div class="modal" v-show="modal">
+            <div class="confirm">
+                <div class="title">提示</div>
+                <p>你是否确认接受学校消息通知</p>
+                <div class="cfm-btn">
+                    <div class="left-btn" @click="sure">确认</div>
+                    <div class="right-btn" @click="modal=!modal">取消</div>
+                </div>
 
-
-
-
-
+            </div>
+        </div>
         <div class="back-logo">
             <img src="{{ asset('images/logo-left-top.png') }}" alt="" class="back-left-top">
             <img src="{{ asset('images/logo-bottom.png') }}" alt="" class="back-bottom">
@@ -53,7 +59,8 @@
             data: {
                 loading: false,
                 username: '',
-                passwd: ''
+                passwd: '',
+                modal: false
             },
             methods: {
                 bind: function () {
@@ -75,32 +82,32 @@
                             })
                         }
 
-                        _this.$confirm('你是否确认接受学校消息通知', '提示', {
-                            confirmButtonText: '确定',
-                            cancelButtonText: '取消',
-                            type: 'warning'
-                        }).then(function(res) {
-                            _this.$http.post('/user/agree').then(function (res) {
-                                const result = res.body
-                                if (result.code < 0) {
-                                  return window.close()
-                                }
-                                this.$message({
-                                    type: 'success',
-                                    message: '确认成功!'
-                                });
-                                window.close()
-
-                            })
-                        }).catch(function() {
-
-                        })
+                        _this.modal = !_this.modal
                     }, function () {
                         _this.$message.error('好像发生了一点错误')
                         _this.loading = false
                     })
+                },
+                sure: function() {
+                    var _this =this
+                    _this.$http.post('/user/agree').then(function (res) {
+                        const result = res.body
+                        if (result.code < 0) {
+                            window.close();
+                            WeixinJSBridge.call('closeWindow');
+                            return
+                        }
+                        this.$message({
+                            type: 'success',
+                            message: '确认成功!'
+                        });
+                        window.close();
+                        WeixinJSBridge.call('closeWindow');
+
+                    })
                 }
             }
+
         })
     </script>
 @endsection

@@ -58,7 +58,7 @@ class MessageController extends Controller
         $message = Message::where('id', $id)->first();
         $message->view = ++$message->view;
         $message->save();
-        return view('jxh.show', ['messaeg' => $message]);
+        return view('jxh.show', ['message' => $message]);
     }
 
 
