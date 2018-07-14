@@ -81,6 +81,9 @@
                                 type: 'warning'
                             })
                         }
+                        if (result.code === 100) {
+                            window.location.href = '{{ url('success') }}'
+                        }
 
                         _this.modal = !_this.modal
                     }, function () {

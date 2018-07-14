@@ -15,7 +15,6 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         if ($request->session()->has('username')) {
-            // todo 跳转已经绑定
             return view('jxh.success');
         }
         $username = $request->get('username');
@@ -30,7 +29,7 @@ class LoginController extends Controller
         }
 
         if (!!$user = User::where('sid', $username)->first()) {
-            return view('jxh.success');
+            return RJM(null, 100, '已经绑定');
         }
 
         if (!$user = User::where('openid', session('openid')->first())) {
@@ -49,6 +48,9 @@ class LoginController extends Controller
     }
 
     public function wechat(Request $request) {
+        if ($request->session()->has('openid')) {
+            return view('jxh.success');
+        }
           $user = app('wechat')->oauth->user();
           $openid = $user->getId();
           if (!$user = User::where('openid', $openid)->first()) {
