@@ -83,6 +83,7 @@
                         }
                         if (result.code === 100) {
                             window.location.href = '{{ url('success') }}'
+                            return
                         }
 
                         _this.modal = !_this.modal

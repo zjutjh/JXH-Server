@@ -32,7 +32,7 @@ class LoginController extends Controller
             return RJM(null, 100, '已经绑定');
         }
 
-        if (!$user = User::where('openid', session('openid')->first())) {
+        if (!$user = User::where('openid', session('openid'))->first()) {
             return RJM(null, -1,  'openid不存在');
 
         }
