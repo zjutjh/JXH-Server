@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendAllUserMessage;
 use App\Message;
+use App\Notifications\TemplateMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class MessageController extends Controller
@@ -96,12 +99,29 @@ class MessageController extends Controller
         return RJM($messages, 1, '查询成功');
     }
 
-    public function pre() {
-
+    public function pre($id) {
+        $message = Message::where('id', $id)->first();
+        $config = [
+            'template_id' => $this->templateConfig['template_id'],
+            // todo url
+            'url' => url(''),
+            'data' => [
+                'first' => $message->title,
+                'keyword1' => '浙江工业大学',
+                'keyword2' => $message->infomer,
+                'keyword3' => $message->created_at->format('Y-m-d H:i:s'),
+                'keyword4' => trim_words($message->content, 50),
+                'remark' => '点击查看详情'
+            ]
+        ];
+        $user = Auth::user();
+        $user->notify(new TemplateMessage($config));
+        return RJM(null, 1, '预览已经发送');
     }
 
     public function sendAll() {
-
+        SendAllUserMessage::dispatch();
+        return RJM(null, 1, '群发模版消息成功');
     }
 
 
