@@ -110,8 +110,8 @@
                 },
                 cancel: function() {
                     this.modal = !this.modal
-                    window.close();
-                    WeixinJSBridge.call('closeWindow');
+                    window.location.href = '{{ url('success') }}'
+
                 }
             }
 
