@@ -47,11 +47,13 @@ Route::post('/admin/login', 'AdminController@login');
 Route::group(['middleware' => ['admin.check', 'api.auth']], function() {
     Route::post('/message/upload', 'MessageController@upload');
     Route::post('/message/create', 'MessageController@create');
-    Route::post('/message/update', 'MessageController@update');
+
     Route::get('/message/{id}', 'MessageController@getMessage');
     Route::get('/messages', 'MessageController@getMessages');
     Route::get('/message/pre/{id}', 'MessageController@pre');
     Route::post('/message/send/{id}', 'MessageController@sendAll');
 });
+
+Route::post('/message/update', 'MessageController@update');
 
 
