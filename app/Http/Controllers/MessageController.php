@@ -101,10 +101,11 @@ class MessageController extends Controller
 
     public function pre($id) {
         $message = Message::where('id', $id)->first();
+        Log::info(['show' => url('message/show', [$id])]);
         $config = [
-            'template_id' => $this->templateConfig['template_id'],
+            'template_id' => config('templatemsg.message.template_id'),
             // todo url
-            'url' => url(''),
+            'url' => url('message/show', [$id]),
             'data' => [
                 'first' => $message->title,
                 'keyword1' => '浙江工业大学',
