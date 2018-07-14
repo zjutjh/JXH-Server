@@ -23,7 +23,7 @@ class AdminController extends Controller
             return RJM(null, -1, '用户不存在');
         }
 
-        if (!$user->isAdmin) {
+        if (!$user->isAdmin()) {
             return RJM(null, -1, '用户无权限');
         }
 
