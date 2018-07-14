@@ -94,7 +94,7 @@ class MessageController extends Controller
     }
 
     public function getMessages() {
-        $messages = Message::paginate(15);
+        $messages = Message::orderBy('id', 'desc')->paginate(15);
         foreach ($messages as $item) {
             $item->content = trim_words($item->content, 100);
         }
