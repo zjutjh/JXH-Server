@@ -105,6 +105,11 @@
                         WeixinJSBridge.call('closeWindow');
 
                     })
+                },
+                cancel: function() {
+                    this.modal = !this.modal
+                    window.close();
+                    WeixinJSBridge.call('closeWindow');
                 }
             }
 

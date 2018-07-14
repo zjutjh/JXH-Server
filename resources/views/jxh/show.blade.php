@@ -22,7 +22,7 @@
                 <h1 class="show-title">{{ $message->title }}</h1>
 
                 <div class="show-inform">
-                    <p><span>{{ $message->infomer }}</span>&nbsp;&nbsp;&nbsp;{{ $message->created_at->format('Y-m-d H:i:s') }}</p>
+                    <p><span>{{ $message->informer }}</span>&nbsp;&nbsp;&nbsp;{{ $message->created_at->format('Y-m-d H:i:s') }}</p>
                 </div>
                 {!! $message->content !!}
             </div>
