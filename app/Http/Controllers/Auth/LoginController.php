@@ -29,7 +29,10 @@ class LoginController extends Controller
         }
 
         if (!!$user = User::where('sid', $username)->first()) {
-            return RJM(null, 100, '已经绑定');
+            $uOpenid = $user->openid;
+            if (session('openid') === $uOpenid) {
+                return RJM(null, 100, '已经绑定');
+            }
         }
 
         if (!$user = User::where('openid', session('openid'))->first()) {
