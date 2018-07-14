@@ -75,10 +75,8 @@ class LoginController extends Controller
 
 
     public function agreeSend() {
-        if (!$username = session('username')) {
-            if (!$user = User::where('sid', $username)->first()) {
-                return  RJM(null, -1, '有一点错误');
-            }
+        if (!$user = User::where('sid', $username)->first()) {
+            return  RJM(null, -1, '有一点错误');
         }
 
         $user->allow_send = true;
