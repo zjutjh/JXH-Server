@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendAllUserMessage;
+use App\Message;
 use App\Services\UserCenterService;
 use App\User;
 use Illuminate\Http\Request;
