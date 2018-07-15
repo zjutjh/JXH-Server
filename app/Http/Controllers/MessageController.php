@@ -139,7 +139,7 @@ class MessageController extends Controller
         $message = Message::where('id', $id)->first();
 
         if ($message->is_send) {
-            return RJM(null, 1, '模板消息已经发送过');
+            return RJM(null, -1, '模板消息已经发送过');
 
         }
         SendAllUserMessage::dispatch($message, [
