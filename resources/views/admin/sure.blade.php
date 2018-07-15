@@ -42,7 +42,7 @@
                 agree: function () {
                     var _this = this
                     _this.$http.get('/message/agree/' + _this.id).then(function (response) {
-                        window.location.href = '{{ url('message/info') }}'
+                        window.location.href = '{{ url('/message/send/action/info') }}'
                     }, function () {
 
                     })
@@ -50,7 +50,7 @@
                 cancel: function() {
                     var _this =this
                     _this.$http.get('/message/agree/cancel/' + _this.id).then(function (res) {
-                        window.location.href = '{{ url('message/info') }}'
+                        window.location.href = '{{ url('/message/send/action/info') }}'
                     })
                 },
 
