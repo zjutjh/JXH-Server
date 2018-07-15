@@ -133,7 +133,7 @@ class MessageController extends Controller
         }
 
         $user =  User::where('sid', $username)->first();
-        if ($user->isAdmin()) {
+        if (!$user->isAdmin()) {
             return RJM(null, -1, '权限不足');
         }
         $message = Message::where('id', $id)->first();
