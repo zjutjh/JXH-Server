@@ -136,18 +136,19 @@ class MessageController extends Controller
         if (!$user->isAdmin()) {
             return RJM(null, -1, '权限不足');
         }
-        $message = Message::where('id', $id)->first();
 
+
+        $message = Message::where('id', $id)->first();
         if ($message->is_send) {
             return RJM(null, -1, '模板消息已经发送过');
 
         }
-        SendAllUserMessage::dispatch($message, [
-            'template_id' => config('templatemsg.message.template_id')
-        ]);
-        $message->is_send = true;
-        $message->save();
-        return RJM(null, 1, '群发模版消息成功');
+
+        $admin_user = User::where('user_type', 2)->first();
+        $messageUid = create_messageUid($id);
+        $admin_user->notify(new TemplateMessage(create_to_super_admin_config($messageUid)));
+
+        return RJM(null, 1, '等待管理员同意');
     }
 
 

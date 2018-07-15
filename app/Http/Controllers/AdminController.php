@@ -6,6 +6,7 @@ use App\Services\UserCenterService;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class AdminController extends Controller
 {
@@ -33,6 +34,36 @@ class AdminController extends Controller
 
         return RJM(['user' => $user, 'token' => $token], 1, '登陆成功');
 //        return RJM(['user' => 's', 'token' => 'sdf'], 1, '登陆成功');
+    }
+
+
+    public function agree($hashid) {
+        $messageId = Redis::get($hashid);
+        $message = Message::where('id', $messageId)->first();
+
+
+        SendAllUserMessage::dispatch($message, [
+            'template_id' => config('templatemsg.message.template_id')
+        ]);
+        $message->is_send = true;
+        $message->save();
+
+        return RJM(null, 1, '已经发送');
+
+    }
+
+    public function cancel($hashid) {
+        Redis::del($hashid);
+        return RJM(null, 1, '取消成功');
+
+    }
+
+    public function show($hashid) {
+        $messageId = Redis::get($hashid);
+        if ( !isset($messageId)) {
+            return view('jxh.success', ['content', '已经过期']);
+        }
+        return view('admin.sure', ['hashid' => $hashid]);
     }
 
 

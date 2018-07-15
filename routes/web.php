@@ -54,6 +54,13 @@ Route::group(['middleware' => ['admin.check', 'api.auth']], function() {
 });
 
 
+Route::get('/message/agree/{hashid}', 'AdminController@agree');
+Route::get('/message/agree/cancel/{hashid}', 'AdminController@cancel');
+Route::get('/message/admin/show/{hashid}', 'AdminController@show');
+Route::get('/message/info', function () {
+   return view('jxh.success', ['content' => '操作成功']);
+});
+
 Route::post('/message/upload', 'MessageController@upload');
 
 

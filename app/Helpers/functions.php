@@ -51,6 +51,35 @@ function trim_words($content, $num_words, $more = '...') {
     return $resutlt;
 }
 
+/** 创建item唯一id
+ * @param $itemId
+ * @return string
+ */
+function create_messageUid($itemId) {
+    $itemUid = md5($itemId);
+
+    \Illuminate\Support\Facades\Redis::set($itemUid, $itemId);
+    \Illuminate\Support\Facades\Redis::expire($itemUid, 60 * 30);
+
+    return $itemUid;
+}
+
+
+function create_to_super_admin_config($message_Uid) {
+    return  [
+        'template_id' => config('templatemsg.message.template_id'),
+        'url' => url('message/admin/show', [$message_Uid]),
+        'data' => [
+            'first' => '请你确认发送',
+            'keyword1' => '浙江工业大学',
+            'keyword2' => '精小弘后台',
+            'keyword3' => $this->message->created_at->format('Y-m-d H:i:s'),
+            'keyword4' => '',
+            'remark' => '点击查看详情'
+        ]
+    ];
+}
+
 /**
  * end
  */
