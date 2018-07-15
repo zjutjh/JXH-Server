@@ -49,7 +49,7 @@ class AdminController extends Controller
         ]);
         $message->is_send = true;
         $message->save();
-
+        Redis::del($hashid);
         return RJM(null, 1, '已经发送');
 
     }
