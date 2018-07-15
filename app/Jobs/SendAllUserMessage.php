@@ -46,7 +46,7 @@ class SendAllUserMessage implements ShouldQueue
             'data' => [
                 'first' => $this->message->title,
                 'keyword1' => '浙江工业大学',
-                'keyword2' => $this->message->infomer,
+                'keyword2' => $this->message->informer,
                 'keyword3' => $this->message->created_at->format('Y-m-d H:i:s'),
                 'keyword4' => trim_words($this->message->content, 50),
                 'remark' => '点击查看详情'

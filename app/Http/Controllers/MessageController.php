@@ -111,7 +111,7 @@ class MessageController extends Controller
             'data' => [
                 'first' => $message->title,
                 'keyword1' => '浙江工业大学',
-                'keyword2' => $message->infomer,
+                'keyword2' => $message->informer,
                 'keyword3' => $message->created_at->format('Y-m-d H:i:s'),
                 'keyword4' => trim_words($message->content, 50),
                 'remark' => '点击查看详情'
