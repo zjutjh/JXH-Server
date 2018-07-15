@@ -3,6 +3,7 @@
 @section('title', '通知详情')
 
 @section('content')
+
     <div class="show-container">
         <div class="show-head">
             <div class="head-left">
@@ -24,7 +25,10 @@
                 <div class="show-inform">
                     <p><span>{{ $message->informer }}</span>&nbsp;&nbsp;&nbsp;{{ $message->created_at->format('Y-m-d H:i:s') }} &nbsp;&nbsp;&nbsp; 阅读量: {{ $message->view }}</p>
                 </div>
-                {!! $message->content !!}
+                <div class="content-container">
+                    {!! $message->content !!}
+                </div>
+
             </div>
 
         </div>
