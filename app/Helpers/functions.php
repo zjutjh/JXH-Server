@@ -73,7 +73,7 @@ function create_to_super_admin_config($message_Uid) {
             'first' => '请你确认发送',
             'keyword1' => '浙江工业大学',
             'keyword2' => '精小弘后台',
-            'keyword3' => $this->message->created_at->format('Y-m-d H:i:s'),
+            'keyword3' => date('Y-m-d H:i:s', time()),
             'keyword4' => '',
             'remark' => '点击查看详情'
         ]
