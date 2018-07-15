@@ -59,7 +59,7 @@ class TemplateMessage extends Notification implements ShouldQueue
         return [
             'touser' => $notifiable->openid,
             'template_id' => $this->data['template_id'],
-            'url' => $this->data['url'],
+            'url' => $this->data['url'] . '?t=' . time(),
             'data' => $this->data['data']
         ];
     }
