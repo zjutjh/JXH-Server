@@ -12,7 +12,7 @@
             </div>
 
             <div class="success-content">
-                    你已经绑定服务号
+                    确定发送
             </div>
             <div class="form-button"  @click="agree">
                 同意发送

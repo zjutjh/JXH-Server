@@ -61,7 +61,7 @@ class AdminController extends Controller
     public function show($hashid) {
         $messageId = Redis::get($hashid);
         if ( !isset($messageId)) {
-            return view('jxh.success', ['content', '已经过期']);
+            return view('jxh.success', ['content' => '已经过期']);
         }
         return view('admin.sure', ['hashid' => $hashid]);
     }
