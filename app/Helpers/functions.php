@@ -31,7 +31,7 @@ function RJM($data, $code, $msg = '', $redirect_url = null)
  */
 
 
-function buildOauthRedirect($url, $scope = 'snsapi_userinfo') {
+function build_oauth_redirect($url, $scope = 'snsapi_userinfo') {
     $redirect_url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='
         .env('WECHAT_APP_ID')
         .'&redirect_uri='
@@ -46,6 +46,7 @@ function trim_words($content, $num_words, $more = '...') {
     $strip_tags_content = preg_replace( '@<(script|style)[^>]*?>.*?</\\1>@si', '', $content);
     $strip_tags_content = strip_tags($strip_tags_content);
     $strip_tags_content = trim($strip_tags_content);
+    $strip_tags_content = str_replace('&nbsp;', '', $strip_tags_content);
     $resutlt = mb_substr($strip_tags_content, 0, $num_words, 'utf-8');
     return $resutlt;
 }

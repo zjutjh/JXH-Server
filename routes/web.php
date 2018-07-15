@@ -31,7 +31,7 @@ Route::get('/message/show/{id}', 'MessageController@show');
 
 //
 
-Route::get('/test', 'Auth\LoginController@agreeSend');
+Route::get('/test', 'OauthController@oauthCancel');
 
 
 Route::get('success', function () {
@@ -55,3 +55,7 @@ Route::group(['middleware' => ['admin.check', 'api.auth']], function() {
 
 
 Route::post('/message/upload', 'MessageController@upload');
+
+
+//user
+Route::get('/user/cancel/send', '');

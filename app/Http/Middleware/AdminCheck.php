@@ -17,7 +17,9 @@ class AdminCheck
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
+        if (!$user = Auth::user()) {
+            return RJM(null, -1, '用户过期');
+        }
         if (!$user->isAdmin()) {
             return RJM(null, -1, '用户无权限');
         }

@@ -15,7 +15,7 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         if ($request->session()->has('username')) {
-            return view('jxh.success');
+            return view('jxh.success', ['content' => '你已经绑定服务号']);
         }
         $username = $request->get('username');
         $passwd = $request->get('passwd');
@@ -68,8 +68,6 @@ class LoginController extends Controller
 
 
           Log::info('微信授权成功', ['openid' => $user->openid]);
-
-          // todo redirect agree
           return view('jxh.bind');
     }
 
@@ -85,5 +83,10 @@ class LoginController extends Controller
 
         Log::info('用户同意发送学校通知', ['username' => $username]);
         return RJM(null, 1, '确认成功');
+    }
+
+
+    public function cancel() {
+        // todo 取消通知
     }
 }

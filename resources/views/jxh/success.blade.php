@@ -12,7 +12,12 @@
             </div>
 
             <div class="success-content">
-                你已经绑定服务号
+                @if (isset($content))
+                    {{ $content }}
+                @else
+                    你已经绑定服务号
+                @endif
+
             </div>
 
         </form>
