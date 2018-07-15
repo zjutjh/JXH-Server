@@ -18,7 +18,7 @@ function RJM($data, $code, $msg = '', $redirect_url = null)
 {
     return response([
         'code' => $code,
-        'error' => $msg,
+        'msg' => $msg,
         'data' => $data,
         'redirect' => $redirect_url,
     ]);

@@ -138,11 +138,13 @@ class MessageController extends Controller
         }
         $message = Message::where('id', $id)->first();
 
-        if (!$message->is_send) {
-            SendAllUserMessage::dispatch($message, [
-                'template_id' => config('templatemsg.message.template_id')
-            ]);
+        if ($message->is_send) {
+            return RJM(null, 1, '模板消息已经发送过');
+
         }
+        SendAllUserMessage::dispatch($message, [
+            'template_id' => config('templatemsg.message.template_id')
+        ]);
         $message->is_send = true;
         $message->save();
         return RJM(null, 1, '群发模版消息成功');

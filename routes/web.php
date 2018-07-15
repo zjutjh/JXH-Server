@@ -58,4 +58,4 @@ Route::post('/message/upload', 'MessageController@upload');
 
 
 //user
-Route::get('/user/cancel/send', '');
+//Route::get('/user/cancel/send', '');
