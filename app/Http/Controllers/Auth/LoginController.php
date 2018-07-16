@@ -51,15 +51,17 @@ class LoginController extends Controller
     }
 
     public function wechat(Request $request) {
-          Log::info('微信授权成功', ['openid' => $user->openid]);
-          $user = app('wechat')->oauth->user();
-          $openid = $user->getId();
+
+          $wuser = app('wechat')->oauth->user();
+
+          $openid = $wuser->getId();
+          Log::info('微信授权成功', ['openid' => $openid]);
           if (!$user = User::where('openid', $openid)->first()) {
               $user = new User();
-              $user->openid = $user->getId();
-              $user->name = $user->getName();
-              $user->nickname = $user->getNickname();
-              $user->avatar = $user->getAvatar();
+              $user->openid = $wuser->getId();
+              $user->name = $wuser->getName();
+              $user->nickname = $wuser->getNickname();
+              $user->avatar = $wuser->getAvatar();
           }
 
 //          $user->sid = session('username');
