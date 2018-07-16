@@ -31,7 +31,7 @@
             </div>
 
         </form>
-        <div class="modal" v-show="modal">
+        <div class="modal" v-show="modal" style="display: none;">
             <div class="confirm">
                 <div class="title">提示</div>
                 <p>你是否确认接受学校消息通知</p>
