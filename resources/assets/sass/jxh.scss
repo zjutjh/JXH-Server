@@ -101,9 +101,8 @@ html, body {
     .form-button {
       margin-top: px2rem(30);
       height: px2rem(130);
-      background-image: url("/images/button.png");
-      background-repeat: no-repeat;
-      background-size: cover;
+      background: linear-gradient(135deg, #1f96d8 5%, #1592fa 20%, #156bfa 80%);
+      box-shadow: 1px 3px 5px 0 rgba(0,0,0,.3);
       line-height: px2rem(130);
       text-align: center;
       font-size: px2rem(40);
