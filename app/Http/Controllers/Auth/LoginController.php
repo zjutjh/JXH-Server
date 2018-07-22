@@ -15,7 +15,7 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         if ($request->session()->has('username')) {
-            return view('jxh.success', ['content' => '你已经绑定服务号']);
+            return view('jxh.success', ['content' => '你已经绑定精小弘']);
         }
         $username = $request->get('username');
         $passwd = $request->get('passwd');

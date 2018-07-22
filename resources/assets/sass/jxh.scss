@@ -98,6 +98,23 @@ html, body {
 
     }
 
+    .form-help {
+      display: flex;
+      flex-direction: row-reverse;
+
+      .help-title {
+        font-size: px2rem(30);
+        color: #fff;
+      }
+
+      .help-logo {
+        margin-left: px2rem(10);
+        width: px2rem(40);
+        height: px2rem(40);
+      }
+
+    }
+
     .form-button {
       margin-top: px2rem(30);
       height: px2rem(130);
@@ -351,6 +368,7 @@ html, body {
 
 }
 
+
 .modal .confirm {
   position: absolute;
   top: 50%;
@@ -409,6 +427,14 @@ html, body {
     }
   }
 
+}
+
+.help-content {
+  color: #888888!important;
+  text-align: center!important;
+  font-size: 1.5rem!important;
+  line-height: 1!important;
+  height: auto!important;
 }
 
 

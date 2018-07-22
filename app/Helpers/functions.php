@@ -56,7 +56,7 @@ function trim_words($content, $num_words, $more = '...') {
  * @return string
  */
 function create_messageUid($itemId) {
-    $itemUid = md5($itemId);
+    $itemUid = str_random(16);
 
     \Illuminate\Support\Facades\Redis::set($itemUid, $itemId);
     \Illuminate\Support\Facades\Redis::expire($itemUid, 60 * 30);
@@ -78,6 +78,26 @@ function create_to_super_admin_config($message_Uid) {
             'remark' => '点击查看详情'
         ]
     ];
+}
+
+
+/**
+ * 处理关键字匹配
+ */
+function is_match($message, \App\Reply $reply) {
+    switch ($reply->type) {
+        case 1:
+            return $message == $reply->reply_content;
+            break;
+        case 2:
+            return !!strstr($message, $reply->reply_content);
+            break;
+        case 3:
+            return !!preg_match('/(' . $reply->reply_content . ')/is', $message);
+            break;
+        default:
+            return false;
+    }
 }
 
 /**

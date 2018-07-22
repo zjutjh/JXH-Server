@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <title>精小弘服务号- @yield('title')</title>
+    <title>精小弘服务号 @yield('title')</title>
 
     <!-- rem 正比例缩放 -->
     <script>!function (a, b, c) {

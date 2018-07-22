@@ -9,6 +9,8 @@
 namespace App\Services;
 
 
+use App\Reply;
+
 class WechatService
 {
 
@@ -52,8 +54,31 @@ class WechatService
 
     public function text($message)
     {
+        $response = $this->matchKeyword($message);
+        return $response ? $response : '';
 
     }
+
+    /**
+     * 关键词匹配
+     */
+    public function matchKeyword($message) {
+        $content = $message->MsgType == 'text' ? $message->Content : $message->EventKey;
+        $keywords = Reply::all();
+        foreach ($keywords as $k => $v) {
+            if ($v->status == 1 && is_match($content, $v)) {
+                return $this->reply();
+            }
+        }
+    }
+
+
+    public function reply() {
+
+    }
+
+
+
 
     public function image($message)
     {

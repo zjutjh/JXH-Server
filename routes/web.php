@@ -31,7 +31,9 @@ Route::get('/message/show/{id}', 'MessageController@show');
 
 //
 
-Route::get('/test', 'OauthController@oauthCancel');
+Route::get('/test', function() {
+    return view('jxh.bind');
+});
 
 
 Route::get('success', function () {
@@ -41,7 +43,7 @@ Route::get('success', function () {
 
 //admin
 Route::get('/admin', function (){
-    return view('admin.index');
+    return response()->view('admin.index')->cookie('XSRF-TOKEN', '123');
 });
 Route::post('/admin/login', 'AdminController@login');
 Route::group(['middleware' => ['admin.check', 'api.auth']], function() {

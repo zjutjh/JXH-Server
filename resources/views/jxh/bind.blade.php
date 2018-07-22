@@ -22,8 +22,10 @@
                 <input v-model="passwd" type="password" class="item-input" placeholder="请输入密码">
             </div>
 
-            <div class="form-help">
+            <div class="form-help" @click="help=!help">
 
+                <img src="{{ asset('images/trouble.png') }}" alt="" class="help-logo">
+                <div class="help-title">帮助</div>
             </div>
 
             <div class="form-button"  @click="bind">
@@ -39,9 +41,19 @@
                     <div class="left-btn" @click="sure">确认</div>
                     <div class="right-btn" @click="modal=!modal">取消</div>
                 </div>
-
             </div>
         </div>
+
+        <div class="modal" v-show="help" style="display: none;">
+            <div class="confirm help-content">
+                <div class="title">提示</div>
+                <p class="help-content">绑定前请先进行精弘账号激活，进入精小弘在线—账号激活—精弘账号激活，本科生、研究生、0+4辅导员请使用学号激活，在编教职工请使用五位工号激活</p>
+                <div class="cfm-btn">
+                    <div class="right-btn" @click="help=!help">取消</div>
+                </div>
+            </div>
+        </div>
+
         <div class="back-logo">
             <img src="{{ asset('images/logo-left-top.png') }}" alt="" class="back-left-top">
             <img src="{{ asset('images/logo-bottom.png') }}" alt="" class="back-bottom">
@@ -60,7 +72,8 @@
                 loading: false,
                 username: '',
                 passwd: '',
-                modal: false
+                modal: false,
+                help: false
             },
             methods: {
                 bind: function () {
