@@ -15,7 +15,7 @@
                 @if (isset($content))
                     {{ $content }}
                 @else
-                    你已经绑定服务号
+                    你已经绑定精小弘
                 @endif
 
             </div>

@@ -44,7 +44,7 @@ class SendAllUserMessage implements ShouldQueue
             // todo url
             'url' => url('message/show', [$this->message->id]),
             'data' => [
-                'first' => [$this->message->title, '#0AAFF1'],
+                'first' => [$this->message->title, '#05328E'],
                 'keyword1' => '浙江工业大学',
                 'keyword2' => $this->message->informer,
                 'keyword3' => date('Y-m-d H:i:s', time()),
