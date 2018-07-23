@@ -10,9 +10,9 @@
 </head>
 <body>
 <div id=app></div>
-<script type=text/javascript src=/assets/js/manifest.85c129ca7147cb8ebf84.js></script>
+<script type=text/javascript src=/assets/js/manifest.b2a787f1f33379231624.js></script>
 <script type=text/javascript src=/assets/js/vendor.b336ccda10b0cfd4dbbb.js></script>
-<script type=text/javascript src=/assets/js/app.78784f4ab4b54e0ba16c.js></script>
+<script type=text/javascript src=/assets/js/app.6643621159dae26bbb3f.js></script>
 </body>
 </body>
 </html>
