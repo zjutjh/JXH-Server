@@ -15,7 +15,8 @@ class LoginController extends Controller
 
     public function login(Request $request) {
         if ($request->session()->has('username')) {
-            return view('jxh.success', ['content' => '你已经绑定精小弘']);
+            $temp = User::where('sid', $request->get('username'));
+            return view('jxh.success', ['user' => $temp]);
         }
         $username = $request->get('username');
         $passwd = $request->get('passwd');
@@ -70,7 +71,8 @@ class LoginController extends Controller
           if (!$user->sid) {
               return view('jxh.bind');
           }
-          return view('jxh.success');
+
+          return view('jxh.mine', ['user' => $user]);
     }
 
 
@@ -90,5 +92,17 @@ class LoginController extends Controller
 
     public function cancel() {
         // todo 取消通知
+        $openid = session('openid');
+        if (!$user = User::where('openid', $openid)->first()) {
+            return  RJM(null, -1, '有一点错误');
+        }
+        $user->allow_send = false;
+        $user->save();
+        Log::info('用户取消发送学校通知', ['username' => $user->sid]);
+        return RJM(null, 1, '取消成功');
+    }
+
+    public function changeBind() {
+        return view('jxh.bind');
     }
 }

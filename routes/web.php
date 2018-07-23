@@ -23,6 +23,8 @@ Route::get('redirect', 'OauthController@redirect');
 Route::get('oauth', 'OauthController@oauth');
 Route::get('wechat/openid', 'Auth\LoginController@wechat');
 Route::post('user/agree', 'Auth\LoginController@agreeSend');
+Route::get('user/change', 'Auth\LoginController@changeBind');
+Route::get('user/send/cancel', 'Auth\LoginController@cancel');
 //
 
 //message
@@ -32,7 +34,7 @@ Route::get('/message/show/{id}', 'MessageController@show');
 //
 
 Route::get('/test', function() {
-    return view('jxh.bind');
+    return view('jxh.mine');
 });
 
 
