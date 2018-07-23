@@ -44,11 +44,11 @@ class SendAllUserMessage implements ShouldQueue
             // todo url
             'url' => url('message/show', [$this->message->id]),
             'data' => [
-                'first' => $this->message->title,
+                'first' => [$this->message->title, '#15b3fa'],
                 'keyword1' => '浙江工业大学',
                 'keyword2' => $this->message->informer,
                 'keyword3' => $this->message->created_at->format('Y-m-d H:i:s'),
-                'keyword4' => $this->message->notify_content,
+                'keyword4' => [$this->message->notify_content, '#F05837'],
                 'remark' => '点击查看详情'
             ]
         ];

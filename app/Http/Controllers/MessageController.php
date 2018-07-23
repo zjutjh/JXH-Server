@@ -115,11 +115,11 @@ class MessageController extends Controller
             // todo url
             'url' => url('message/show', [$id]),
             'data' => [
-                'first' => $message->title,
+                'first' => [$message->title, '#15b3fa'],
                 'keyword1' => '浙江工业大学',
                 'keyword2' => $message->informer,
                 'keyword3' => $message->created_at->format('Y-m-d H:i:s'),
-                'keyword4' => $message->notify_content,
+                'keyword4' => [$message->notify_content, '#F05837'],
                 'remark' => '点击查看详情'
             ]
         ];
