@@ -35,8 +35,8 @@ class AsyncUnionId implements ShouldQueue
         $userService = app('wechat')->user;
         $openid = $this->openid;
         $userInfo = $userService->get($openid);
-        if ($unionid = $userInfo->unionid) {
-
-        }
+        $user = User::where('openid', $openid)->first();
+        $user->unionID = $userInfo->unionid;
+        $user->save();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Jobs\AsyncUnionId;
 use App\Notifications\TemplateMessage;
 use App\User;
 use Illuminate\Http\Request;
@@ -67,6 +68,10 @@ class LoginController extends Controller
 
 //          $user->sid = session('username');
           $user->save();
+          if (!$user->unionID) {
+              AsyncUnionId::dispatch($openid);
+          }
+
           session(['openid' => $openid]);
           if (!$user->sid) {
               return view('jxh.bind');
