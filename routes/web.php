@@ -43,7 +43,7 @@ Route::get('success', function () {
 
 //admin
 Route::get('/admin', function (){
-    return response()->view('admin.index')->cookie('XSRF-TOKEN', '123');
+    return response()->view('admin.index');
 });
 Route::post('/admin/login', 'AdminController@login');
 Route::group(['middleware' => ['admin.check', 'api.auth']], function() {

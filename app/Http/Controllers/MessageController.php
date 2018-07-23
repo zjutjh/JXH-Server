@@ -20,11 +20,13 @@ class MessageController extends Controller
         $title = $request->get('title');
         $informer = $request->get('informer');
         $content=  $request->get('content');
+        $notify_content = $request->get('notify_content');
 
         $message = new Message();
         $message->title = $title;
         $message->informer = $informer;
         $message->content = $content;
+        $message->notify_content = $notify_content;
         $message->save();
 
         Log::info('创建了一条模板消息');
@@ -49,11 +51,15 @@ class MessageController extends Controller
         $title = $request->get('title');
         $informer = $request->get('informer');
         $content=  $request->get('content');
+        $notify_content = $request->get('notify_content');
+
 
         $message = Message::where('id', $id)->first();
         $message->title = $title;
         $message->informer = $informer;
         $message->content = $content;
+        $message->notify_content = $notify_content;
+
         $message->save();
         return RJM(null, 1, '保存成功');
     }
@@ -113,7 +119,7 @@ class MessageController extends Controller
                 'keyword1' => '浙江工业大学',
                 'keyword2' => $message->informer,
                 'keyword3' => $message->created_at->format('Y-m-d H:i:s'),
-                'keyword4' => trim_words($message->content, 50),
+                'keyword4' => $message->notify_content,
                 'remark' => '点击查看详情'
             ]
         ];
