@@ -94,6 +94,7 @@
                             type: 'success',
                             message: '确认成功!'
                         });
+                        window.location.href = '/oauth'
                         _this.modal = !_this.modal
                     })
                     @else
@@ -108,6 +109,7 @@
                             message: '确认成功!'
                         });
                     })
+                    window.location.href = '/oauth'
                     @endif
                 },
                 cancel: function () {
