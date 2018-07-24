@@ -56,6 +56,7 @@ Route::group(['middleware' => ['admin.check', 'api.auth']], function() {
     Route::get('/message/pre/{id}', 'MessageController@pre');
     Route::post('/message/send/{id}', 'MessageController@sendAll');
 });
+Route::get('/user/bind/count', 'AdminController@countBind');
 
 
 Route::get('/message/agree/{hashid}', 'AdminController@agree');

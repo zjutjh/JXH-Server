@@ -70,5 +70,12 @@ class AdminController extends Controller
 
 
 
+    public function countBind() {
+        $count = User::whereNotNull('sid')->count();
+        return '绑定人数：' . $count . '人';
+    }
+
+
+
 
 }
