@@ -21,6 +21,7 @@ class CreateMessagesTable extends Migration
             $table->longText('content')->comment('通知内容');
             $this->text('notify_content');
             $table->integer('view')->default(0)->comment('阅读次数');
+            $table->string('cover_image');
             $table->boolean('is_send')->default(false)->comment('是否发送');
             $table->timestamps();
         });

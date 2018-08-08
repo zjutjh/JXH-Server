@@ -21,12 +21,13 @@ class MessageController extends Controller
         $informer = $request->get('informer');
         $content=  $request->get('content');
         $notify_content = $request->get('notify_content');
-
+        $cover_image = $request->get('cover_image');
         $message = new Message();
         $message->title = $title;
         $message->informer = $informer;
         $message->content = $content;
         $message->notify_content = $notify_content;
+        $message->cover_image = $cover_image;
         $message->save();
 
         Log::info('创建了一条模板消息');
@@ -52,6 +53,7 @@ class MessageController extends Controller
         $informer = $request->get('informer');
         $content=  $request->get('content');
         $notify_content = $request->get('notify_content');
+        $cover_image = $request->get('cover_image');
 
 
         $message = Message::where('id', $id)->first();
@@ -59,6 +61,7 @@ class MessageController extends Controller
         $message->informer = $informer;
         $message->content = $content;
         $message->notify_content = $notify_content;
+        $message->cover_image = $cover_image;
 
         $message->save();
         return RJM(null, 1, '保存成功');

@@ -8,6 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <title>精小弘服务号 @yield('title')</title>
+    <script>
+        wx.config({{ app('wechat')->jssdk->buildConfig(array('onMenuShareQQ', 'onMenuShareWeibo'), true)  }})
+    </script>
 
     <!-- rem 正比例缩放 -->
     <script>!function (a, b, c) {

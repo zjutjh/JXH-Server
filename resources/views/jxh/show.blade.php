@@ -40,4 +40,13 @@
             </div>
         </div>
     </div>
+    <script>
+        wx.onMenuShareTimeline({
+            title: '{{ $message->title }}', // 分享标题
+            link: document.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: '{{ $message->cover_image }}', // 分享图标
+            success: function () {
+                // 用户点击了分享后执行的回调函数
+            })
+    </script>
 @endsection
