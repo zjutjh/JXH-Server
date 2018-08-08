@@ -47,6 +47,7 @@
             imgUrl: '{{ $message->cover_image }}', // 分享图标
             success: function () {
                 // 用户点击了分享后执行的回调函数
-            })
+            }
+        })
     </script>
 @endsection
