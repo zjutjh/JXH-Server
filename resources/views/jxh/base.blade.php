@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <title>精小弘服务号 @yield('title')</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
         wx.config({!! app('wechat')->jssdk->buildConfig(array('onMenuShareTimeline'), true) !!})
     </script>
