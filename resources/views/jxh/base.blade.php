@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>精小弘服务号 @yield('title')</title>
     <script>
-        wx.config({{ app('wechat')->jssdk->buildConfig(array('onMenuShareQQ', 'onMenuShareWeibo'), true)  }})
+        wx.config({!! app('wechat')->jssdk->buildConfig(array('onMenuShareTimeline'), true) !!})
     </script>
 
     <!-- rem 正比例缩放 -->
