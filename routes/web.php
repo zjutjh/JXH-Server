@@ -70,4 +70,12 @@ Route::post('/message/upload', 'MessageController@upload');
 
 
 //user
-//Route::get('/user/cancel/send', '');
+//Route::get('/user/cancel/send', 'OauthController');
+
+
+//oauth api
+Route::post('/stdcode/to/sid', 'OauthController@stuCodeToSid');
+Route::get('/ouath/classmate', 'OauthController@classmateOauth');
+Route::get('/classmate', 'OauthController@toClassmateDetail');
+
+//
