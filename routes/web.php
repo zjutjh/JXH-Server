@@ -75,7 +75,7 @@ Route::post('/message/upload', 'MessageController@upload');
 
 //oauth api
 Route::post('/stdcode/to/sid', 'OauthController@stuCodeToSid');
-Route::get('/ouath/classmate', 'OauthController@classmateOauth');
+Route::get('/oauth/classmate', 'OauthController@classmateOauth');
 Route::get('/classmate', 'OauthController@toClassmateDetail');
 
 //

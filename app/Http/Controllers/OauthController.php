@@ -28,8 +28,8 @@ class OauthController extends Controller
 
 
     public function classmateOauth(Request $request) {
-        $url = build_oauth_redirect('http://jxh.jh.zjut.edu.cn/classmate');
-        $oauth = app('wechat')->oauth->setRequest($request)->redirect($url);
+        //$url = build_oauth_redirect();
+        $oauth = app('wechat')->oauth->setRequest($request)->redirect('http://jxh.jh.zjut.edu.cn/classmate');
         return $oauth;
     }
 
