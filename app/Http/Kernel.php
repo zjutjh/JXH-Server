@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminCheck;
+use App\Http\Middleware\BindCheck;
 use App\Http\Middleware\JwtAuth;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -64,7 +65,8 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'api.auth' => JwtAuth::class,
-        'admin.check' => AdminCheck::class
+        'admin.check' => AdminCheck::class,
+        'bind.check' => BindCheck::class
     ];
 
 }

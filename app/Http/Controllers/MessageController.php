@@ -134,16 +134,16 @@ class MessageController extends Controller
     public function sendAll(Request $request, $id) {
         $username = $request->get('username');
         $passwd = $request->get('passwd');
-        $uCenter = new UserCenterService();
 
+        $user = Auth::user();
+        if ($user->sid !== $username) {
+            return RJM(null, -1, '用户不匹配');
+        }
+
+        $uCenter = new UserCenterService();
         if (!$error = $uCenter->checkJhPassport($username, $passwd)) {
             $error = $uCenter->getError();
             return RJM(null, -1,  $error ? $error : '用户名或密码错误');
-        }
-
-        $user =  User::where('sid', $username)->first();
-        if (!$user->isAdmin()) {
-            return RJM(null, -1, '权限不足');
         }
 
 

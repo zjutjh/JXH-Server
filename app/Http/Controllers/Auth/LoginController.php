@@ -96,7 +96,6 @@ class LoginController extends Controller
 
 
     public function cancel() {
-        // todo 取消通知
         $openid = session('openid');
         if (!$user = User::where('openid', $openid)->first()) {
             return  RJM(null, -1, '有一点错误');
