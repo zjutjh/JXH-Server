@@ -33,9 +33,7 @@ Route::get('/message/show/{id}', 'MessageController@show');
 
 //
 
-Route::get('/test', function() {
-    return view('jxh.mine');
-});
+Route::post('/test', 'JhController@sendMsResult');
 
 
 Route::get('success', function () {
