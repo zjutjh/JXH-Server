@@ -32,8 +32,9 @@ class JhController extends Controller
 
         foreach ($stuArr as $k) {
             if (!$user = User::where('sid', $k[0])->first()) {
-                $user->notify(new TemplateMessage($config));
+                continue;
             }
+            $user->notify(new TemplateMessage($config));
         }
 
         return RJM(null, 1, '已经全部发送');
