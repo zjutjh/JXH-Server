@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use App\Notifications\TemplateMessage;
 use App\User;
 use Illuminate\Http\Request;
@@ -16,16 +17,17 @@ class JhController extends Controller
         while ($data = fgetcsv($file)) {
             $stuArr [] = $data;
         }
+        $message = Message::where('id', 12)->first();
         $config = [
             'template_id' => config('templatemsg.message.template_id'),
             // todo url
             'url' => url('message/show', [12]),
             'data' => [
-                'first' => ['精弘网络开发部第二轮面试通知', '#05328E'],
+                'first' => [$message->title, '#05328E'],
                 'keyword1' => '浙江工业大学',
-                'keyword2' => '精弘网络开发部',
+                'keyword2' => $message->informer,
                 'keyword3' => date('Y-m-d H:i:s', time()),
-                'keyword4' => ['精弘网络第二轮面试通知', '#4D0015'],
+                'keyword4' => [$message->notify_content, '#4D0015'],
                 'remark' => '点击查看详情'
             ]
         ];
