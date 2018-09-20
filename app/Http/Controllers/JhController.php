@@ -19,7 +19,7 @@ class JhController extends Controller
         $config = [
             'template_id' => config('templatemsg.message.template_id'),
             // todo url
-            'url' => url('message/show', 12),
+            'url' => url('message/show', [12]),
             'data' => [
                 'first' => ['精弘网络开发部第二轮面试通知', '#05328E'],
                 'keyword1' => '浙江工业大学',
