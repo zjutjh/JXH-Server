@@ -19,7 +19,7 @@ class JhController extends Controller
         while ($data = fgetcsv($file)) {
             $stuArr [] = $data;
         }
-        $message = Message::where('id', 12)->first();
+        $message = Message::where('id', $id)->first();
         $config = [
             'template_id' => config('templatemsg.message.template_id'),
             // todo url
@@ -66,7 +66,7 @@ class JhController extends Controller
         $lists = Redis::smembers('ms');
         $data = '';
         foreach ($lists as $k) {
-            $data .= $k[0] . "</br>";
+            $data .= $k . "</br>";
         }
         return $data;
     }
