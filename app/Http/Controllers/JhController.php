@@ -58,7 +58,7 @@ class JhController extends Controller
 
 
     public function wxRedirect(Request $request) {
-        $oauth = app('wechat')->oauth->setRequest($request)->redirect('/ms/sure');
+        $oauth = app('wechat')->oauth->setRequest($request)->redirect('http://jxh.jh.zjut.edu.cn/ms/sure');
         return $oauth;
     }
 
