@@ -49,8 +49,7 @@ class JhController extends Controller
      * 确定参加笔试
      */
     public function sureGoBs() {
-        $wuser = app('wechat')->oauth->user();
-        $openid = $wuser->getId();
+        $openid = session('openid');
         $user = User::where('openid', $openid)->first();
         Redis::sadd('ms', $user->sid);
         return view('jxh.success', '已经确定你参加笔试');

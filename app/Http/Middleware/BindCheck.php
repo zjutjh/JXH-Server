@@ -18,12 +18,14 @@ class BindCheck
     {
         $wuser = app('wechat')->oauth->user();
         $openid = $wuser->getId();
+
         if (!$user = User::where('openid', $openid)->first()) {
             return redirect('/oauth');
         }
         if (!$user->sid) {
             return redirect('/oauth');
         }
+        session(['openid' => $openid]);
         return $next($request);
     }
 }
