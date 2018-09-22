@@ -35,6 +35,7 @@ Route::get('/message/show/{id}', 'MessageController@show');
 Route::post('/ms/result', 'JhController@sendMsResult');
 Route::get('/ms/sure', 'JhController@sureGoBs')->middleware('bind.check');
 Route::get('/ms/redirect', 'JhController@wxRedirect');
+Route::get('/ms/sure/num', 'JhController@getSureNum');
 
 
 Route::get('success', function () {

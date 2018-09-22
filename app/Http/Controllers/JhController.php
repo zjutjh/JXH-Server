@@ -64,6 +64,10 @@ class JhController extends Controller
 
     public function getSureNum() {
         $lists = Redis::smembers('ms');
-        dd($lists);
+        $data = '';
+        foreach ($lists as $k) {
+            $data .= $k[0] . "</br>";
+        }
+        return $data;
     }
 }
