@@ -6,11 +6,13 @@ use App\Message;
 use App\Notifications\TemplateMessage;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class JhController extends Controller
 {
     public function sendMsResult(Request $request) {
         $stuCsv = $request->file('csv');
+        $id = $request->get('id');
 //        dd($stuCsv);
         $file = fopen($stuCsv->getRealPath(), 'r');
         $stuArr = [];
@@ -21,7 +23,7 @@ class JhController extends Controller
         $config = [
             'template_id' => config('templatemsg.message.template_id'),
             // todo url
-            'url' => url('message/show', [12]),
+            'url' => url('message/show', [$id]),
             'data' => [
                 'first' => [$message->title, '#05328E'],
                 'keyword1' => '浙江工业大学',
@@ -41,5 +43,28 @@ class JhController extends Controller
 
         return RJM(null, 1, '已经全部发送');
 
+    }
+
+    /**
+     * 确定参加笔试
+     */
+    public function sureGoBs() {
+        $wuser = app('wechat')->oauth->user();
+        $openid = $wuser->getId();
+        $user = User::where('openid', $openid)->first();
+        Redis::sadd('ms', $user->sid);
+        return view('jxh.success', '已经确定你参加笔试');
+    }
+
+
+    public function wxRedirect(Request $request) {
+        $oauth = app('wechat')->oauth->setRequest($request)->redirect('/ms/sure');
+        return $oauth;
+    }
+
+
+    public function getSureNum() {
+        $lists = Redis::smembers('ms');
+        dd($lists);
     }
 }

@@ -31,9 +31,10 @@ Route::get('user/send/cancel', 'Auth\LoginController@cancel');
 Route::get('/message/show/{id}', 'MessageController@show');
 
 
-//
-
-Route::post('/test', 'JhController@sendMsResult');
+//开发部招新通知
+Route::post('/ms/result', 'JhController@sendMsResult');
+Route::get('/ms/sure', 'JhController@sureGoBs')->middleware('bind.check');
+Route::get('/ms/redirect', 'JhController@wxRedirect');
 
 
 Route::get('success', function () {
