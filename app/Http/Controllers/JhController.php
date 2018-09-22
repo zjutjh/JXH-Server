@@ -52,7 +52,7 @@ class JhController extends Controller
         $openid = session('openid');
         $user = User::where('openid', $openid)->first();
         Redis::sadd('ms', $user->sid);
-        return view('jxh.success', '已经确定你参加笔试');
+        return view('jxh.success', ['content' => '已经确定你参加笔试']);
     }
 
 
