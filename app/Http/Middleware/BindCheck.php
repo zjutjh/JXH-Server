@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\User;
 use Closure;
+use Illuminate\Support\Facades\Redis;
 
 class BindCheck
 {
@@ -18,14 +19,26 @@ class BindCheck
     {
         $wuser = app('wechat')->oauth->user();
         $openid = $wuser->getId();
+        $wuser = app('wechat')->user->get($openid);
+        dd($wuser);
+
+        if ($wuser['subscribe']) {
+            return redirect('http://weixin.qq.com/r/TjozK_-EzbKyratI929c');
+        }
 
         if (!$user = User::where('openid', $openid)->first()) {
             return redirect('/oauth');
         }
+
         if (!$user->sid) {
             return redirect('/oauth');
         }
-        session(['openid' => $openid]);
+
+
+
+
+//        session(['openid' => $openid]);
+//        Redis::set('user.' . $user->id, $openid);
         return $next($request);
     }
 }

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Http\Request;
+
 Route::get('/', function () {
     return '精小弘';
 });
@@ -71,6 +73,16 @@ Route::post('/message/upload', 'MessageController@upload');
 
 //user
 //Route::get('/user/cancel/send', 'OauthController');
+
+
+// 工大毕业照
+Route::get('jxh/byz/oauth', 'GdByzController@oauth');
+Route::get('jxh/byz', 'GdByzController@index');
+Route::get('jxh/byz/show/{hashid}', 'GdByzController@show');
+Route::get('jxh/test', 'GdByzController@getZjz');
+//
+
+
 
 
 //oauth api
