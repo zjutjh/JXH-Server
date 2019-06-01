@@ -34,7 +34,7 @@
                         <div class="progress">@{{progressCircle}}%</div>
                     </div>
                 </label>
-                <input id="input-file" type="file" @change="fileChange">
+                <input id="input-file" type="file" @change="fileChange" accept="image/jpeg">
 
             </div>
 
@@ -266,7 +266,7 @@
                     if (/image\/jpeg/.test(file.type) || /image\/jpg/.test(file.type)) {
                         dataURL = canvas.toDataURL('image/jpeg', options.compress.quality);
                     } else {
-                        dataURL = canvas.toDataURL(file.type, options.compress.qualify);
+                        dataURL = canvas.toDataURL(file.type);
                     }
 
                     if (options.type == 'file') {
@@ -419,9 +419,9 @@
                     const _this = this
                     compress(file, {
                         compress: {
-                            width: 4096,
-                            height: 4096,
-                            qualify: 0.2
+                            width: 2048,
+                            height: 2048,
+                            quality: 0.3
                         }
                     }, async function (blog) {
                         const fileForm = new FormData()
