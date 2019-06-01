@@ -40,7 +40,7 @@
                         <div class="progress">@{{progressCircle}}%</div>
                     </div>
                 </label>
-                <input id="input-file" type="file" @change="fileChange" accept="image/jpeg">
+                <input id="input-file" type="file" @change="fileChange">
 
             </div>
 
