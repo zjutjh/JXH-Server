@@ -80,6 +80,7 @@ class GdByzController extends Controller
 
     public function show($hashId) {
         $img = Redis::get('img.' . $hashId);
+
         return view('gdbyz.byz', ['img' => $img]);
     }
 

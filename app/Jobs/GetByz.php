@@ -75,7 +75,7 @@ class GetByz implements ShouldQueue
     {
         return array(
             'template_id' => config('templatemsg.message.template_id'),
-            'url' => url('jxh/byz/show', [encrypt($id)]),
+            'url' => url('jxh/byz/show', [$id]),
             'data' => [
                 'first' => ['', '#05328E'],
                 'keyword1' => '浙江工业大学',
