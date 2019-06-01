@@ -430,7 +430,7 @@
                             method: 'post',
                             onUploadProgress: function (progressEvent) { //原生获取上传进度的事件
                                 if (progressEvent.lengthComputable) {
-                                    _this.progressCircle = (progressEvent.loaded / progressEvent.total) * 100
+                                    _this.progressCircle = Math.floor((progressEvent.loaded / progressEvent.total) * 100)
                                 }
                             },
                             data: fileForm
