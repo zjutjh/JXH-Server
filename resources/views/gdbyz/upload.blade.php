@@ -312,7 +312,7 @@
                 style: {
                     'stroke-dasharray': '0px, 295.31px',
                 },
-                {{--user: '{{$user}}'--}}
+                user: '{{$user}}'
             }),
             mounted: () => {
                 // cube.Toast.$create({
