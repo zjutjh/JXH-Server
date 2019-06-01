@@ -32,7 +32,6 @@ class GetByz implements ShouldQueue
     public function __construct($openid, $data)
     {
         //
-        $this->faceService = new FaceMergeServices(config('face.appkey'), config('face.appsecret'));
         $this->openid = $openid;
         $this->data = $data;
     }
@@ -45,6 +44,7 @@ class GetByz implements ShouldQueue
     public function handle()
     {
 
+        $this->faceService = new FaceMergeServices(config('face.appkey'), config('face.appsecret'));
         $byz = $this->faceService->getByz($this->data['img'], $this->data['sex']);
 
 
