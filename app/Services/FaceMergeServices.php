@@ -72,13 +72,38 @@ class FaceMergeServices
         $res = $this->client->post(self::FACEMERGEURL, [
             'multipart' => [
                 [
-                    'api_key' => $this->appKey,
-                    'api_secret' => $this->appSecret,
-                    'template_url' => $template_url,
-//                'template_rectangle' => 'abc',
-                    'merge_url' => $merge_url,
-                    'merge_rate' => self::MERGERATE,
-                ]
+                    'Content-type' => 'multipart/form-data',
+                    'name' => 'api_key',
+                    'contents' => $this->appKey
+                ],
+                [
+                    'Content-type' => 'multipart/form-data',
+                    'name' => 'api_secret',
+                    'contents' => $this->appSecret
+                ],
+                [
+                    'Content-type' => 'multipart/form-data',
+                    'template_url' => 'template_url',
+                    'contents' => $template_url
+                ],
+                [
+                    'Content-type' => 'multipart/form-data',
+                    'template_url' => 'merge_url',
+                    'contents' => $merge_url
+                ],
+                [
+                    'Content-type' => 'multipart/form-data',
+                    'template_url' => 'merge_rate',
+                    'contents' => self::MERGERATE
+                ],
+//                [
+//                    'api_key' => $this->appKey,
+//                    'api_secret' => $this->appSecret,
+//                    'template_url' => $template_url,
+////                'template_rectangle' => 'abc',
+//                    'merge_url' => $merge_url,
+//                    'merge_rate' => self::MERGERATE,
+//                ]
             ]]);
 
         $value = json_decode($res->getBody(), true);
