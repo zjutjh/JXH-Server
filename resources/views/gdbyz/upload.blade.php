@@ -18,17 +18,23 @@
                     </div>
                     <div class="upload-progress" v-show="progress">
                         <div class="svg">
-                            <svg viewBox="0 0 100 100"><path d="
+                            <svg viewBox="0 0 100 100">
+                                <path d="
         M 50 50
         m 0 -47
         a 47 47 0 1 1 0 94
         a 47 47 0 1 1 0 -94
-        " stroke="#e5e9f2" stroke-width="4.8" fill="none" class="el-progress-circle__track" style="stroke-dasharray: 295.31px, 295.31px; stroke-dashoffset: 0px;"></path><path ref="svg" d="
+        " stroke="#e5e9f2" stroke-width="4.8" fill="none" class="el-progress-circle__track"
+                                      style="stroke-dasharray: 295.31px, 295.31px; stroke-dashoffset: 0px;"></path>
+                                <path ref="svg" d="
         M 50 50
         m 0 -47
         a 47 47 0 1 1 0 94
         a 47 47 0 1 1 0 -94
-        " stroke="rgba(154, 255, 183, 0.5)" fill="none" stroke-linecap="round" stroke-width="4.8" class="el-progress-circle__path" :style="style" style="stroke-dasharray: 0px, 295.31px;stroke-dashoffset: 0px;transition: stroke-dasharray 0.6s ease 0s, stroke 0.6s ease 0s;"></path></svg>
+        " stroke="rgba(154, 255, 183, 0.5)" fill="none" stroke-linecap="round" stroke-width="4.8"
+                                      class="el-progress-circle__path" :style="style"
+                                      style="stroke-dasharray: 0px, 295.31px;stroke-dashoffset: 0px;transition: stroke-dasharray 0.6s ease 0s, stroke 0.6s ease 0s;"></path>
+                            </svg>
                         </div>
 
                         <div class="progress">@{{progressCircle}}%</div>
@@ -235,6 +241,7 @@
 
                 // 启用压缩的分支
                 const img = new Image();
+                var fileSize = parseFloat(parseInt(file['size']) / 1024 / 1024).toFixed(2);
                 img.onload = function () {
                     const ratio = detectVerticalSquash(img);
                     const orientation = getOrientation(dataURItoBuffer(img.src));
@@ -263,11 +270,16 @@
                     }
                     ctx.drawImage(img, 0, 0, w, h / ratio);
 
-                    if (/image\/jpeg/.test(file.type) || /image\/jpg/.test(file.type)) {
-                        dataURL = canvas.toDataURL('image/jpeg', options.compress.quality);
+                    if (fileSize < 1) {
+                        dataURL = canvas.toDataURL('image/jpeg', 1);
+                    } else if (fileSize < 2 && fileSize > 1) {
+                        dataURL = canvas.toDataURL('image/jpeg', 0.5);
+
                     } else {
-                        dataURL = canvas.toDataURL(file.type);
+                        dataURL = canvas.toDataURL('image/jpeg', 0.2);
+
                     }
+
 
                     if (options.type == 'file') {
                         if (/;base64,null/.test(dataURL) || /;base64,$/.test(dataURL)) {
