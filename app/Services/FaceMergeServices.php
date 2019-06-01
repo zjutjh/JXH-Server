@@ -16,7 +16,7 @@ class FaceMergeServices
     // face merge url
     const FACEMERGEURL = 'https://api-cn.faceplusplus.com/imagepp/v1/mergeface';
 
-    const MERGERATE = 50;
+    const MERGERATE = 80;
 
 
     // app key
@@ -72,27 +72,22 @@ class FaceMergeServices
         $res = $this->client->post(self::FACEMERGEURL, [
             'multipart' => [
                 [
-                    'Content-type' => 'multipart/form-data',
                     'name' => 'api_key',
                     'contents' => $this->appKey
                 ],
                 [
-                    'Content-type' => 'multipart/form-data',
                     'name' => 'api_secret',
                     'contents' => $this->appSecret
                 ],
                 [
-                    'Content-type' => 'multipart/form-data',
                     'name' => 'template_url',
                     'contents' => $template_url
                 ],
                 [
-                    'Content-type' => 'multipart/form-data',
                     'name' => 'merge_url',
                     'contents' => $merge_url
                 ],
                 [
-                    'Content-type' => 'multipart/form-data',
                     'name' => 'merge_rate',
                     'contents' => self::MERGERATE
                 ],
