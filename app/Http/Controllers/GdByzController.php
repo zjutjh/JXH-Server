@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\GetByz;
 use App\Services\FaceMergeServices;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +33,7 @@ class GdByzController extends Controller
         $openid = $wuser->getId();
         $wuser = app('wechat')->user->get($openid);
 
-        if ($wuser['subscribe']) {
+        if ($wuser->subscribe) {
             return redirect('http://weixin.qq.com/r/TjozK_-EzbKyratI929c');
         }
 
