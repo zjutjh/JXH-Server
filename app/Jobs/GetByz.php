@@ -77,11 +77,11 @@ class GetByz implements ShouldQueue
             'template_id' => config('templatemsg.message.template_id'),
             'url' => url('jxh/byz/show', [$id]),
             'data' => [
-                'first' => ['这里有你的毕业证哦～～', '#05328E'],
+                'first' => ['这里有你的电子毕业证哦～～', '#05328E'],
                 'keyword1' => '浙江工业大学',
                 'keyword2' => '浙江工业大学学工部 精弘网络',
                 'keyword3' => date('Y-m-d H:i:s', time()),
-                'keyword4' => ['请查收你的毕业证哦', '#4D0015'],
+                'keyword4' => ['请查收你的电子毕业证哦', '#4D0015'],
                 'remark' => '点击查看详情'
             ]
         );

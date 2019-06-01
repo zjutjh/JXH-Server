@@ -16,7 +16,7 @@ class FaceMergeServices
     // face merge url
     const FACEMERGEURL = 'https://api-cn.faceplusplus.com/imagepp/v1/mergeface';
 
-    const MERGERATE = 80;
+    const MERGERATE = 90;
 
 
     // app key

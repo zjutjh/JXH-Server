@@ -61,7 +61,7 @@
             </div>
 
             <div class="form-item">
-                <div class="form-button" @click="showConfirm">生成我的毕业证</div>
+                <div class="form-button" @click="showConfirm">生成我的电子毕业证</div>
             </div>
 
         </div>
