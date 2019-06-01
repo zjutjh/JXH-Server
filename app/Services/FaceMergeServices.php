@@ -71,12 +71,14 @@ class FaceMergeServices
 
         $res = $this->client->post(self::FACEMERGEURL, [
             'multipart' => [
-                'api_key' => $this->appKey,
-                'api_secret' => $this->appSecret,
-                'template_url' => $template_url,
+                [
+                    'api_key' => $this->appKey,
+                    'api_secret' => $this->appSecret,
+                    'template_url' => $template_url,
 //                'template_rectangle' => 'abc',
-                'merge_url' => $merge_url,
-                'merge_rate' => self::MERGERATE,
+                    'merge_url' => $merge_url,
+                    'merge_rate' => self::MERGERATE,
+                ]
             ]]);
 
         $value = json_decode($res->getBody(), true);
