@@ -83,17 +83,17 @@ class FaceMergeServices
                 ],
                 [
                     'Content-type' => 'multipart/form-data',
-                    'template_url' => 'template_url',
+                    'name' => 'template_url',
                     'contents' => $template_url
                 ],
                 [
                     'Content-type' => 'multipart/form-data',
-                    'template_url' => 'merge_url',
+                    'name' => 'merge_url',
                     'contents' => $merge_url
                 ],
                 [
                     'Content-type' => 'multipart/form-data',
-                    'template_url' => 'merge_rate',
+                    'name' => 'merge_rate',
                     'contents' => self::MERGERATE
                 ],
 //                [
