@@ -33,7 +33,7 @@ class GdByzController extends Controller
         $openid = $wuser->getId();
         $wuser = app('wechat')->user->get($openid);
 
-        if ($wuser->subscribe) {
+        if (!$wuser->subscribe) {
             return redirect('http://weixin.qq.com/r/TjozK_-EzbKyratI929c');
         }
 
