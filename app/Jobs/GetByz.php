@@ -67,7 +67,7 @@ class GetByz implements ShouldQueue
         $user = User::where('openid', $this->openid)->first();
         Redis::set('img.'. $hashId, $imgUrl);
         $user->notify(new TemplateMessage($this->getConfig($hashId)));
-        usleep(300);
+        sleep(1);
     }
 
 

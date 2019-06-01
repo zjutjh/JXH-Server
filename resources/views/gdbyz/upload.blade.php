@@ -23,7 +23,7 @@
         m 0 -47
         a 47 47 0 1 1 0 94
         a 47 47 0 1 1 0 -94
-        " stroke="#e5e9f2" stroke-width="4.8" fill="none" class="el-progress-circle__track" style="stroke-dasharray: 295.31px, 295.31px; stroke-dashoffset: 0px;"></path><path d="
+        " stroke="#e5e9f2" stroke-width="4.8" fill="none" class="el-progress-circle__track" style="stroke-dasharray: 295.31px, 295.31px; stroke-dashoffset: 0px;"></path><path ref="svg" d="
         M 50 50
         m 0 -47
         a 47 47 0 1 1 0 94
@@ -310,9 +310,9 @@
                 progress: false,
                 progressCircle: 0,
                 style: {
-                    'stroke-dasharray': '295.31px, 295.31px',
+                    'stroke-dasharray': '0px, 295.31px',
                 },
-                user: '{{$user}}'
+                {{--user: '{{$user}}'--}}
             }),
             mounted: () => {
                 // cube.Toast.$create({
@@ -322,8 +322,9 @@
             },
             watch: {
                 progressCircle(next, last) {
-                    let px = 295.31 * next
-                    this.style['stroke-dasharray'] = `${px}px, 295.31px`
+                    let px = 295.31 * (next / 100)
+                    console.log(px)
+                    this.$set(this.style, 'stroke-dasharray', `${px}px, 295.31px`)
                 }
             },
 
