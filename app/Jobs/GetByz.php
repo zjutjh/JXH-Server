@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Notifications\TemplateMessage;
 use App\Services\FaceMergeServices;
+use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -62,9 +63,10 @@ class GetByz implements ShouldQueue
 
         $img->save('/var/www/html/jxh-server/storage/app/public/show/'.date("YmdHis", time()).rand(1000, 9999).".jpg");
         $imgUrl = url('storage/show/'.$img->basename);
-        $hashId= encrypt($this->data['openid']);
+        $hashId= encrypt($this->openid);
+        $user = User::where('openid', $this->openid)->first();
         Redis::set('img.'. $hashId, $imgUrl);
-        $this->user->notify(new TemplateMessage($this->getConfig($hashId)));
+        $user->notify(new TemplateMessage($this->getConfig($hashId)));
         usleep(300);
     }
 
