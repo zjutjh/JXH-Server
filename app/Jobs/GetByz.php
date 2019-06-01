@@ -60,7 +60,7 @@ class GetByz implements ShouldQueue
             $font->size(60);
         });
 
-        $img->save('storage/app/public/show/'.date("YmdHis", time()).rand(1000, 9999).".jpg");
+        $img->save('/var/www/html/jxh-server/storage/app/public/show/'.date("YmdHis", time()).rand(1000, 9999).".jpg");
         $imgUrl = url('storage/show/'.$img->basename);
         $hashId= encrypt($this->data['openid']);
         Redis::set('img.'. $hashId, $imgUrl);
