@@ -305,7 +305,7 @@ body {
   font-size: 1.28rem;
 }
 
-.bind-container .bind-form .form-item .item-input:-ms-input-placeholder {
+.bind-container .bind-form .form-item .item-input::-moz-placeholder {
   color: #FFF;
   font-size: 1.28rem;
 }

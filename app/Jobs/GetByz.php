@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Intervention\Image\ImageManager;
 
 class GetByz implements ShouldQueue
 {
@@ -44,6 +45,19 @@ class GetByz implements ShouldQueue
     {
 
         $byz = $this->faceService->getByz();
+
+
+        $image = new ImageManager(array('driver' => 'imagick'));
+        $img = $image->make($byz);
+
+        $img->text("朱兴照", 470, 1020, function($font) {
+            $font->file('/var/www/html/jxh-server/storage/app/public/font.ttf');
+            $font->size(60);
+        });
+        $img->text("安全工程", 280, 1110, function($font) {
+            $font->file('/var/www/html/jxh-server/storage/app/public/font.ttf');
+            $font->size(60);
+        });
 
 
         $this->user->notify(new TemplateMessage($this->getConfig('')));

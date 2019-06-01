@@ -78,6 +78,8 @@ Route::post('/message/upload', 'MessageController@upload');
 // 工大毕业照
 Route::get('jxh/byz/oauth', 'GdByzController@oauth');
 Route::get('jxh/byz', 'GdByzController@index');
+Route::post('jxh/byz/upload', 'GdByzController@upload');
+Route::post('jxh/byz/submit', 'GdByzController@submit');
 Route::get('jxh/byz/show/{hashid}', 'GdByzController@show');
 Route::get('jxh/test', 'GdByzController@getZjz');
 //

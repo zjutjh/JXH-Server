@@ -101,6 +101,11 @@ function to_unicode($string)
     return $unistr;
 }
 
+
+function static_url($url) {
+    return 'https://static.zjutjh.com/jxh' . $url;
+}
+
 /**
  * end
  */

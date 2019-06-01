@@ -3,7 +3,6 @@
 @import "index";
 
 
-
 html, body {
   width: 100%;
   height: 100%;
@@ -12,15 +11,359 @@ html, body {
 
 
 .app {
+  position: relative;
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: 100%;
+  height: 100%;
   width: 100%;
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 
 .byz-container {
+  background: url("https://static.zjutjh.com/jxh/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  padding-top: 2rem;
+
+  .byz-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+
+    .form-item {
+      display: flex;
+      margin-bottom: 2rem;
+
+      input[type=file] {
+        display: none;
+      }
+
+      .form-upload {
+        width: 22rem;
+        height: 30rem;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+        border-radius: 15px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        background-size: cover;
+
+        .upload-progress {
+          margin-top: 4rem;
+          width: 15rem;
+          height: 15rem;
+
+
+          .progress {
+            text-align: center;
+            color: rgba(0, 0, 0, .5);
+            font-size: 3rem;
+          }
+        }
+
+        .upload-icon {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          padding: 2rem 1rem;
+
+          .upload-text {
+            width: 11rem;
+            height: 4rem;
+            margin-bottom: 3rem;
+          }
+
+          .upload-add {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 15rem;
+            height: 15rem;
+            border-radius: 50%;
+            background: rgba(154, 255, 183, 0.5);
+            margin: 0 auto;
+
+            img {
+              height: 10rem;
+              width: 10rem;
+
+            }
+          }
+        }
+      }
+
+
+      input[type=text] {
+        width: 19.5rem;
+        height: 3rem;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        opacity: 1;
+        border-radius: 15px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.9rem;
+        padding: .4rem 0;
+      }
+
+
+      .form-button {
+        width: 23.4rem;
+        height: 5rem;
+        background: rgba(177, 239, 212, 1);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        border-radius: 25px;
+        font-size: 1.9rem;
+        color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+        line-height: 5rem;
+      }
+
+
+      & + .item-radio {
+        display: flex;
+        flex-direction: row;
+        width: 19.5rem;
+        height: 3rem;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        opacity: 1;
+        border-radius: 15px;
+
+        input[type=radio] + .form-radio {
+          width: 50%;
+          line-height: 3rem;
+          text-align: center;
+          font-size: 1.9rem;
+          color: rgba(0, 0, 0, .5);
+          transition: background-color .2s;
+          background: rgba(255, 255, 255, 1);
+          border-radius: 15px;
+
+        }
+
+
+        input[type=radio]:checked + label {
+          background: rgba(177, 239, 212, 1);
+        }
+
+        input[type=radio] {
+          display: none;
+        }
+      }
+
+
+    }
+
+
+  }
+
+
+  .byz-show {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+
+    .byz-text {
+      margin-top: 2rem;
+
+      img {
+        width: 24.5rem;
+        height: 5.9rem;
+      }
+    }
+
+    .show {
+      margin-top: 2.1rem;
+      width:32rem;
+      height:22rem;
+      background:rgba(255,255,255,1);
+      box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+      border-radius:20px;
+    }
+  }
+
+
+  .loading {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 12.3rem;
+
+    .loading-title {
+      img {
+        width: 15rem;
+        height: 3.4rem;
+
+      }
+    }
+
+
+    .loading-ani {
+      display: flex;
+      flex-direction: row;
+      margin-top: 9.5rem;
+
+      .ani-circle {
+        width: 2.2rem;
+        height: 2.2rem;
+        background: rgba(60, 243, 158, 0.5);
+        border-radius: 50%;
+        margin: 0 1rem;
+      }
+
+
+      @keyframes ani-cir {
+
+        16% {
+
+
+        }
+
+        34% {
+
+        }
+
+        50% {
+
+        }
+
+        67% {
+
+        }
+
+        84% {
+
+        }
+
+
+        100% {
+
+        }
+
+
+      }
+
+    }
+
+
+    .loading-text {
+      margin-top: 2.2rem;
+
+      img {
+        width: 32.8rem;
+        height: 3.6rem;
+      }
+    }
+  }
+}
+
+
+footer {
+  height: 3.1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: .6rem;
+
+  img {
+    height: 3.1rem;
+    width: 3.1rem;
+    margin-right: .7rem;
+  }
+
+  span {
+    line-height: 3.1rem;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.2rem;
+
+  }
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.50);
+  z-index: 5000;
+}
+
+.confirm-container {
+
+
+  .confirm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate( -50%, -50%);
+    -moz-transform: translate( -50%, -50%);
+    -ms-transform: translate( -50%, -50%);
+    -o-transform: translate( -50%, -50%);
+    transform: translate( -50%, -50%);
+    background: #FFFFFF;
+    border-radius: 4px;
+    font-family: PingFangSC-Regular;
+    width: 28rem;
+
+    .title {
+      font-size: 1.8rem;
+      color: #000;
+      text-align: center;
+
+      height: 5rem;
+      line-height: 5rem;
+    }
+
+    p {
+      color: #888888;
+      text-align: center;
+      font-size: 1.5rem;
+      height: 4.2rem;
+      line-height: 4.2rem;
+    }
+
+    .cfm-btn {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 5rem;
+
+      .left-btn {
+        width: 14rem;
+        text-align: center;
+        font-family: PingFangSC-Regular;
+        font-size: 1.8rem;
+        color: #02BB00;
+        line-height: 5rem;
+      }
+
+      .right-btn {
+
+        width: 14rem;
+        text-align: center;
+        font-family: PingFangSC-Regular;
+        font-size: 1.8rem;
+        color: #000000;
+        line-height: 5rem;
+      }
+    }
+
+  }
 
 }

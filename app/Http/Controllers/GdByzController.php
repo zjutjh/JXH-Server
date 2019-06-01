@@ -24,18 +24,48 @@ class GdByzController extends Controller
     }
 
 
-    public function getZjz(Request $request) {
-//        $zjz = $request->file('zjz');
-        $image = new ImageManager(array('driver' => 'imagick'));
-        $img = $image->make(file_get_contents('https://static.zjutjh.com/jxh/female.jpg'));
+
+    public function index() {
+        $wuser = app('wechat')->oauth->user();
+        $openid = $wuser->getId();
+        $wuser = app('wechat')->user->get($openid);
+        dd($wuser);
+        if ($wuser['subscribe']) {
+            return redirect('http://weixin.qq.com/r/TjozK_-EzbKyratI929c');
+        }
+
+        if (!$user = User::where('openid', $openid)->first()) {
+            return redirect('/oauth');
+        }
+
+        if (!$user->sid) {
+            return redirect('/oauth');
+        }
 
 
-        $img->text(to_unicode("朱兴照"), 480, 965, function($font) {
-            $font->file(Storage::get('public/font.ttf'));
-            $font->size(75);
-        });
-        return $img->response('jpg');
+
     }
+
+
+    public function getZjz(Request $request) {
+        return view('gdbyz.upload');
+    }
+
+
+    public function submit(Request $request) {
+        $data = $request->all();
+
+    }
+
+    public function upload(Request $request) {
+        $file = $request->file('file');
+        $path = $file->store('public/images');
+        $url = substr($path, 7);
+        $url = url('storage/' . $url);
+        return RJM(['url'=> $url], 1, '上传成功');
+
+    }
+
 
 
 }

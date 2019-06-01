@@ -10,7 +10,7 @@
     <title>精小弘服务号 @yield('title')</title>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
-        wx.config({!! app('wechat')->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false) !!})
+{{--        wx.config({!! app('wechat')->jssdk->buildConfig(array('onMenuShareTimeline', 'onMenuShareAppMessage'), false) !!})--}}
     </script>
 
     <!-- rem 正比例缩放 -->
@@ -36,13 +36,18 @@
             375, 10, 16);</script>
     <!-- /rem -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/element-ui@2.0.3/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/cube-ui/lib/cube.min.css">
     <link rel="stylesheet" href="{{ asset('css/byz.css') }}">
 </head>
 <body>
 
-<div class="app">
+<div class="app" id="app">
     @yield('content')
 </div>
+
+<script src="//static.zjutjh.com/jxh/app.js"></script>
+<script src="https://unpkg.com/cube-ui/lib/cube.min.js"></script>
+@yield('script')
 
 </body>
 </html>
