@@ -34,7 +34,7 @@ class GdByzController extends Controller
         $wuser = app('wechat')->user->get($openid);
 
         if (!$wuser->subscribe) {
-            return redirect('http://weixin.qq.com/r/TjozK_-EzbKyratI929c');
+            return redirect('https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0MTUzNzQzMg==&scene=126&bizpsid=0#wechat_redirect');
         }
 
         if (!$user = User::where('openid', $openid)->first()) {
@@ -44,6 +44,7 @@ class GdByzController extends Controller
         if (!$user->sid) {
             return redirect('/oauth');
         }
+
 
         Redis::set('user.'.$user->id, $openid);
 
