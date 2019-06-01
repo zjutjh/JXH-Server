@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\GetByz;
 use App\Services\FaceMergeServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
@@ -29,7 +31,7 @@ class GdByzController extends Controller
         $wuser = app('wechat')->oauth->user();
         $openid = $wuser->getId();
         $wuser = app('wechat')->user->get($openid);
-        dd($wuser);
+
         if ($wuser['subscribe']) {
             return redirect('http://weixin.qq.com/r/TjozK_-EzbKyratI929c');
         }
@@ -42,8 +44,9 @@ class GdByzController extends Controller
             return redirect('/oauth');
         }
 
+        Redis::set('user.'.$user->id, $openid);
 
-
+        return view('gdbyz.upload', ['user' => encrypt($user->id)]);
     }
 
 
@@ -54,7 +57,14 @@ class GdByzController extends Controller
 
     public function submit(Request $request) {
         $data = $request->all();
+        $openid = Redis::get('user.' . decrypt($data['user']));
+        GetByz::dispatch($openid, $data);
+        return RJM(null, 1, '提交成功');
+    }
 
+
+    public function await() {
+        return view('gdbyz.prompt');
     }
 
     public function upload(Request $request) {
@@ -63,7 +73,12 @@ class GdByzController extends Controller
         $url = substr($path, 7);
         $url = url('storage/' . $url);
         return RJM(['url'=> $url], 1, '上传成功');
+    }
 
+
+    public function show($hashId) {
+        $img = Redis::get('img.' . $hashId);
+        return view('gdbyz.byz', ['img' => $img]);
     }
 
 

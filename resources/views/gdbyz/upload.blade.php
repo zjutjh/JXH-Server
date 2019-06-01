@@ -311,7 +311,8 @@
                 progressCircle: 0,
                 style: {
                     'stroke-dasharray': '295.31px, 295.31px',
-                }
+                },
+                user: '{{$user}}'
             }),
             mounted: () => {
                 // cube.Toast.$create({
@@ -376,7 +377,8 @@
                         'img': this.imgUrl,
                         'name': this.name,
                         'major': this.major,
-                        'sex': this.sex
+                        'sex': this.sex,
+                        'user': this.user
                     }
                     await axios({
                         url: '/jxh/byz/submit',
@@ -385,6 +387,7 @@
                     }).then(res => {
                         if (res.data.code > 0) {
 
+                            window.location.href = '{{ url('jxh/byz/await') }}'
                             return
                         }
                         cube.Toast.$create({

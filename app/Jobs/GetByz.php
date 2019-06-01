@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Redis;
 use Intervention\Image\ImageManager;
 
 class GetByz implements ShouldQueue
@@ -17,9 +18,9 @@ class GetByz implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
 
-    public $user;
+    public $openid;
 
-    public $zjz;
+    public $data;
 
     private $faceService;
 
@@ -28,12 +29,12 @@ class GetByz implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($user, $zjz)
+    public function __construct($openid, $data)
     {
         //
         $this->faceService = new FaceMergeServices(config('face.appkey'), config('face.appsecret'));
-        $this->user;
-        $this->zjz = $zjz;
+        $this->openid = $openid;
+        $this->data = $data;
     }
 
     /**
@@ -44,32 +45,35 @@ class GetByz implements ShouldQueue
     public function handle()
     {
 
-        $byz = $this->faceService->getByz();
+        $byz = $this->faceService->getByz($this->data['img'], $this->data['sex']);
 
 
         $image = new ImageManager(array('driver' => 'imagick'));
         $img = $image->make($byz);
 
-        $img->text("朱兴照", 470, 1020, function($font) {
+        $img->text($this->data['name'], 470, 1020, function($font) {
             $font->file('/var/www/html/jxh-server/storage/app/public/font.ttf');
             $font->size(60);
         });
-        $img->text("安全工程", 280, 1110, function($font) {
+        $img->text($this->data['major'], 280, 1110, function($font) {
             $font->file('/var/www/html/jxh-server/storage/app/public/font.ttf');
             $font->size(60);
         });
 
-
-        $this->user->notify(new TemplateMessage($this->getConfig('')));
+        $img->save('public/storage/show/'.date("YmdHis", time()).rand(1000, 9999).".jpg");
+        $imgUrl = url('storage/show/'.$img->basename);
+        $hashId= encrypt($this->data['openid']);
+        Redis::set('img.'. $hashId, $imgUrl);
+        $this->user->notify(new TemplateMessage($this->getConfig($hashId)));
         usleep(300);
     }
 
 
-    private function getConfig($url)
+    private function getConfig($id)
     {
         return array(
             'template_id' => config('templatemsg.message.template_id'),
-            'url' => url('message/show', ['']),
+            'url' => url('jxh/byz/show', [encrypt($id)]),
             'data' => [
                 'first' => ['', '#05328E'],
                 'keyword1' => '浙江工业大学',

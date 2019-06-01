@@ -40,8 +40,9 @@ class FaceMergeServices
     /**
      * 获取融合人脸头像
      */
-    private function getMergeFace()
+    private function getMergeFace($merge_url, $template_url)
     {
+        return $this->postFace($merge_url, $template_url);
 
     }
 
@@ -49,16 +50,22 @@ class FaceMergeServices
     /**
      * 获取融合毕业证
      */
-    public function getByz()
+    public function getByz($img, $sex)
     {
+        if ($sex === '男') {
+            $url = 'https://static.zjutjh.com/jxh/man.jpg';
+        } else {
+            $url = 'https://static.zjutjh.com/jxh/female.jpg';
+        }
 
+        return $this->getMergeFace($img, $url);
     }
 
 
     /**
      * post data to face++
      */
-    private function postFace()
+    private function postFace($merge_url, $template_url)
     {
 
 
@@ -66,11 +73,14 @@ class FaceMergeServices
             'multipart' => [
                 'api_key' => $this->appKey,
                 'api_secret' => $this->appSecret,
-                'template_file' => 'abc',
-                'template_rectangle' => 'abc',
-                'merge_file' => 'abc',
+                'template_url' => $template_url,
+//                'template_rectangle' => 'abc',
+                'merge_url' => $merge_url,
                 'merge_rate' => self::MERGERATE,
             ]]);
+
+        $value = json_decode($res->getBody(), true);
+        return $value['result'];
 
     }
 

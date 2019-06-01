@@ -1,6 +1,6 @@
 @extends('gdbyz.base')
 
-@section('title', '你的毕业证了')
+@section('title', '毕业了')
 
 
 @section('content')
@@ -10,8 +10,8 @@
                 <img src="https://static.zjutjh.com/jxh/byz-text.png" alt="">
             </div>
             
-            <div class="show">
-                <img src="" alt="">
+            <div class="show" style="background-image: url({{ $img }}); background-size: cover">
+
             </div>
         </div>
         @include('gdbyz.footer')
