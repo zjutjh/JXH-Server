@@ -266,7 +266,7 @@
                     if (/image\/jpeg/.test(file.type) || /image\/jpg/.test(file.type)) {
                         dataURL = canvas.toDataURL('image/jpeg', options.compress.quality);
                     } else {
-                        dataURL = canvas.toDataURL(file.type);
+                        dataURL = canvas.toDataURL(file.type, options.compress.qualify);
                     }
 
                     if (options.type == 'file') {
@@ -421,7 +421,7 @@
                         compress: {
                             width: 4096,
                             height: 4096,
-                            qualify: 0.5
+                            qualify: 0.2
                         }
                     }, async function (blog) {
                         const fileForm = new FormData()
