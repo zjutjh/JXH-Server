@@ -269,6 +269,7 @@
                         orientationHelper(canvas, ctx, orientation);
                     }
                     ctx.drawImage(img, 0, 0, w, h / ratio);
+                    // console.log()
 
                     if (fileSize < 1) {
                         dataURL = canvas.toDataURL('image/jpeg', 1);
@@ -434,7 +435,7 @@
                             width: 2048,
                             height: 2048,
                             quality: 0.3
-                        }
+                        }, type: 'file'
                     }, async function (blog) {
                         const fileForm = new FormData()
                         fileForm.append('file', blog, file.name)
