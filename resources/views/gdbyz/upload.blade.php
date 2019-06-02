@@ -365,7 +365,7 @@
                         type: 'confirm',
                         icon: 'cubeic-alert',
                         title: '确定提交嘛',
-                        content: '提交生成毕业证哦，生成的毕业证是按你提交的照片的人脸进行融合照片的',
+                        content: '提交生成毕业证哦，生成的毕业证是按你提交的照片的人脸进行融合照片的!确定你上传的图片有清晰的正面脸部照，不然无法生成或生成效果不好',
                         confirmBtn: {
                             text: '确定',
                             active: true,
