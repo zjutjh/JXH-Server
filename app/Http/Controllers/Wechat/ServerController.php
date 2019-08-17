@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Wechat;
 
+use App\Jobs\RedirectWxToBk;
 use BadMethodCallException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,8 +20,13 @@ class ServerController extends Controller
     }
 
 
-    public function server()
+    public function server(Request $request)
     {
+        if ($request->method() === 'GET') {
+            RedirectWxToBk::dispatch($request->all(), 'GET') ;
+        } else {
+            RedirectWxToBk::dispatch($request->getContent(), 'POST') ;
+        }
         $this->wechat->server->push(function ($message) {
             $type = $message->MsgType;
             try {
