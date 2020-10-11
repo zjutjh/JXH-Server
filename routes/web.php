@@ -27,14 +27,12 @@ Route::get('wechat/openid', 'Auth\LoginController@wechat');
 Route::post('user/agree', 'Auth\LoginController@agreeSend');
 Route::get('user/change', 'Auth\LoginController@changeBind');
 Route::get('user/send/cancel', 'Auth\LoginController@cancel');
-//
 
 //message
 Route::get('/message/show/{id}', 'MessageController@show');
 
 
 //开发部招新通知
-Route::post('/ms/result', 'JhController@sendMsResult');
 Route::get('/ms/sure', 'JhController@sureGoBs')->middleware('bind.check');
 Route::get('/ms/redirect', 'JhController@wxRedirect');
 Route::get('/ms/sure/num', 'JhController@getSureNum');
@@ -57,6 +55,9 @@ Route::group(['middleware' => ['admin.check', 'api.auth']], function() {
     Route::get('/messages', 'MessageController@getMessages');
     Route::get('/message/pre/{id}', 'MessageController@pre');
     Route::post('/message/send/{id}', 'MessageController@sendAll');
+
+    //开发部招新通知
+    Route::post('/ms/result', 'JhController@sendMsResult');
 });
 Route::get('/user/bind/count', 'AdminController@countBind');
 
@@ -83,7 +84,7 @@ Route::post('jxh/byz/submit', 'GdByzController@submit');
 Route::get('jxh/byz/show/{hashid}', 'GdByzController@show');
 Route::get('jxh/byz/await', 'GdByzController@await');
 Route::get('jxh/test', 'GdByzController@getZjz');
-//
+
 
 
 
@@ -92,5 +93,3 @@ Route::get('jxh/test', 'GdByzController@getZjz');
 Route::post('/stdcode/to/sid', 'OauthController@stuCodeToSid');
 Route::get('/oauth/classmate', 'OauthController@classmateOauth');
 Route::get('/classmate', 'OauthController@toClassmateDetail');
-
-//

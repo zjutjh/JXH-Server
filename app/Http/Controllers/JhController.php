@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Redis;
 
 class JhController extends Controller
 {
-    public function sendMsResult(Request $request) {
+    public function sendMsResult(Request $request)
+    {
         $stuCsv = $request->file('csv');
         $id = $request->get('id');
-//        dd($stuCsv);
         $file = fopen($stuCsv->getRealPath(), 'r');
         $stuArr = [];
         while ($data = fgetcsv($file)) {
@@ -35,10 +35,9 @@ class JhController extends Controller
         ];
 
         foreach ($stuArr as $k) {
-            if (!$user = User::where('sid', $k[0])->first()) {
-                continue;
-            }
-            $user->notify(new TemplateMessage($config));
+            $user = User::where('sid', $k[0])->first();
+            if (!!!$user)
+                $user->notify(new TemplateMessage($config));
         }
 
         return RJM(null, 1, '已经全部发送');
@@ -48,26 +47,28 @@ class JhController extends Controller
     /**
      * 确定参加笔试
      */
-    public function sureGoBs() {
+    public function sureGoBs()
+    {
         $openid = session('openid');
         $user = User::where('openid', $openid)->first();
-        Redis::sadd('ms', $user->sid);
+        Redis::sadd('ms2020', $user->sid);
         return view('jxh.success', ['content' => '已经确定你参加笔试']);
     }
 
 
-    public function wxRedirect(Request $request) {
-        $oauth = app('wechat')->oauth->setRequest($request)->redirect('http://jxh.jh.zjut.edu.cn/ms/sure');
-        return $oauth;
+    public function wxRedirect(Request $request)
+    {
+        return app('wechat')->oauth->setRequest($request)->redirect('http://jxh.jh.zjut.edu.cn/ms/sure');
     }
 
 
-    public function getSureNum() {
-        $lists = Redis::smembers('ms');
+    public function getSureNum()
+    {
+        $lists = Redis::smembers('ms2020');
         $data = '';
-        foreach ($lists as $k) {
+        foreach ($lists as $k)
             $data .= $k . "</br>";
-        }
+
         return $data;
     }
 }
